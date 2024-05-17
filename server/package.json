@@ -1,0 +1,33 @@
+{
+  "name": "lms-startup",
+  "version": "1.0.0",
+  "description": "```mermaid",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx watch ./src/app.ts",
+    "start": "node ./dist/app.ts",
+    "test": "test"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@eslint/js": "^9.2.0",
+    "@types/pg": "^8.11.6",
+    "eslint": "^8.57.0",
+    "prettier": "3.2.5",
+    "typescript": "^5.4.5",
+    "typescript-eslint": "^7.9.0"
+  },
+  "dependencies": {
+    "@apollo/server": "^4.10.4",
+    "@graphql-tools/load-files": "^7.0.0",
+    "express": "^4.19.2",
+    "graphql": "^16.8.1",
+    "graphql-modules": "^2.3.0",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.11.5",
+    "tsx": "^4.10.3"
+  }
+}
