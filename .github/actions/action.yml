@@ -1,7 +1,0 @@
-runs:
-  hello_world:
-    name: hello world job
-    steps:
-      - name: hello world first step
-      - runs: echo "Hello WoooooooooooorrrrrrRRRRLLLLDDDD"
-
