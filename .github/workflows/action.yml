@@ -7,11 +7,12 @@ on:
 jobs:
   pipeline:
     runs-on: ubuntu-latest
-    name: lint job 
+    name: lint job
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
       - name: install dependencies
         working-directory: ./server
         run: npm ci
-        run: npx eslint ./src
+      - run: npx run lint
+
