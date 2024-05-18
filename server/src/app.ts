@@ -9,7 +9,7 @@ const app = express();
 const application = createApplication({
   modules: [bookmodule],
 });
-
+console.log('added for workflows');
 const executor = application.createApolloExecutor();
 const schema = application.schema;
 

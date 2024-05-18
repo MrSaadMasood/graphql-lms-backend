@@ -1,7 +1,7 @@
 name: initial workflow
 on:
   push:
-    branches: 
+    branches:
       - main
 
 jobs:
@@ -16,3 +16,4 @@ jobs:
           echo $GITHUB_ACTION
           echo $GITHUB_JOB
           echo $GITHUB_ACTOR
+
