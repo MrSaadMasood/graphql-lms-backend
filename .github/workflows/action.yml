@@ -16,4 +16,4 @@ jobs:
           echo $GITHUB_ACTION
           echo $GITHUB_JOB
           echo $GITHUB_ACTOR
-
+          echo $GITHUB_WORKSPACE
