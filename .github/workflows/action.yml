@@ -13,5 +13,5 @@ jobs:
       - uses: actions/setup-node@v4
       - name: install dependencies
         working-directory: ./server
-        runs: npm ci
-        runs: npx eslint ./src
+        run: npm ci
+        run: npx eslint ./src
