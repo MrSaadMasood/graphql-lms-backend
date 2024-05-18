@@ -5,20 +5,13 @@ on:
       - main
 
 jobs:
-  tester:
+  pipeline:
     runs-on: ubuntu-latest
-    name: test job
+    name: lint job 
     steps:
-      - name: step one
-        run: |
-          echo "the varibales are"
-          echo $GITHUB_REF
-          echo $GITHUB_ACTION
-          echo $GITHUB_JOB
-          echo $GITHUB_ACTOR
-          echo $GITHUB_WORKSPACE
-      - name: intermediate
-        uses: actions/checkout@v4
-      - name: step two
-        uses: ./.github/actions
-
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+      - name: install dependencies
+        working-directory: ./server
+        runs: npm ci
+        runs: npx eslint ./src
