@@ -17,6 +17,8 @@ jobs:
           echo $GITHUB_JOB
           echo $GITHUB_ACTOR
           echo $GITHUB_WORKSPACE
+      - name: intermediate
+        uses: actions/checkout@v4
       - name: step two
         uses: ./.github/actions
-          
+
