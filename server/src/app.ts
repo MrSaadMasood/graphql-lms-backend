@@ -19,7 +19,7 @@ const apolloServer = new ApolloServer({
       return { executor };
     },
     onSchemaLoadOrUpdate(callback) {
-      callback({ apiSchema: schema } as any);
+      callback({ apiSchema: schema, coreSupergraphSdl: '' });
       return () => {};
     },
     async stop() {},
