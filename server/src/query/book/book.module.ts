@@ -1,14 +1,12 @@
 import { createModule } from 'graphql-modules';
-import bookResolver from './resolver.js';
+import bookResolver from './resolver';
 import { loadFilesSync } from '@graphql-tools/load-files';
-import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
+import { join } from 'path';
+import { __dirname } from '../../utils/dirname';
 
 export const bookmodule = createModule({
   id: 'book-module',
   dirname: __dirname,
-  typeDefs: loadFilesSync(join(__dirname, './type.graphql')),
+  typeDefs: loadFilesSync(join(__dirname, '../query/book/type.graphql')),
   resolvers: [bookResolver],
 });

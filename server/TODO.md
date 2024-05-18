@@ -1,8 +1,8 @@
 # Todo For Backend
 
-[ ] - start a simple server using graphql and wit the postgres attached
+[x] - start a simple server using graphql and wit the postgres attached
 
-[ ] - write endpoint for a simple insert operation
+[ x ] - write endpoint for a simple insert operation
 
 [ ] - write tests for the 2 endpoints
 

@@ -1,4 +1,4 @@
-import pg from '../../postgresClient/pgClient.js';
+import pg from '../../postgresClient/pgClient';
 
 const resolver = {
   Query: {
