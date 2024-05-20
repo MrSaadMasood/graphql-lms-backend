@@ -4,7 +4,7 @@ on:
     branches:
       - main
     types: [opened, sychronize]
-  push
+  push:
 
 jobs:
   pipeline:
@@ -21,7 +21,7 @@ jobs:
         run: npm ci
       - run: echo "$GIT"
         environment:
-            GIT: ${{ toJson(github)}}
+          GIT: ${{ toJson(github)}}
       - run: npm run lint
       - run: tsc
       - name: Docker Compose Action
@@ -29,4 +29,3 @@ jobs:
         with:
           compose-file: "./server/docker-compose.dev.yml"
       - run: npm run test
-
