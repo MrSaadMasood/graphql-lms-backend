@@ -9,7 +9,6 @@ on:
 
 jobs:
   pipeline:
-    if: ${{ github.ref != 'refs/head/main' }}
     runs-on: ubuntu-latest
     name: lint job
     defaults:
@@ -24,9 +23,10 @@ jobs:
         env:
           GIT: ${{ toJson(github)}}
       - run: npm run lint
-      - run: tsc
       - name: Docker Compose Action
         uses: hoverkraft-tech/compose-action@v2.0.0
         with:
           compose-file: "./server/docker-compose.dev.yml"
+          down-flags: "--volumes --rmi all"
       - run: npm run test
+      - run: tsc
