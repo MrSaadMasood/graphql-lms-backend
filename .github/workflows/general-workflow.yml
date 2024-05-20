@@ -36,8 +36,8 @@ jobs:
       - name: git commits
         run: echo "$COMMIT"
         env:
-          COMMIT: ${{ github.event.commit }}
+          COMMIT: ${{ toJson( github.event.commits )}}
       - name: git messages commit
         run: echo "$MESSAGE"
         env:
-          MESSAGE: ${{ github.event.commit.*.message }}
+          MESSAGE: ${{ toJson( github.event.commits.*.message )}}
