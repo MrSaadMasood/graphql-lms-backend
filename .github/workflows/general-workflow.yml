@@ -29,3 +29,5 @@ jobs:
         env:
           CI: true
       - run: tsc
+      - if: ${{ contains(toJson(github.event.commits.*.message), '#skip')}}
+        run: echo "skip is present in the commit"
