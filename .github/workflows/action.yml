@@ -1,8 +1,11 @@
 name: initial workflow
 on:
-  push:
+  pull_request:
     branches:
       - main
+    types: [opened, sychronize]
+  push:
+    branches-ignore: main
 
 jobs:
   pipeline:
@@ -17,10 +20,12 @@ jobs:
       - name: install dependencies
         run: npm ci
       - run: npm run lint
-      - run: tsc
       - name: Docker Compose Action
         uses: hoverkraft-tech/compose-action@v2.0.0
         with:
           compose-file: "./server/docker-compose.dev.yml"
+          down-flags: "--volumes --rmi all"
       - run: npm run test
-
+        env:
+          CI: true
+      - run: tsc
