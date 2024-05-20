@@ -21,7 +21,6 @@ describe('it should tests this', () => {
   afterAll(async () => await apolloServer.stop());
   it('should run successfully', async () => {
     const response = await api.post('/').send(queryData);
-    console.log('The response of the api request is', response.body);
-    console.log('The response of the api request is', response.error);
+    expect(response.body).toStrictEqual({ data: { Book: { name: 'emily' } } });
   });
 });

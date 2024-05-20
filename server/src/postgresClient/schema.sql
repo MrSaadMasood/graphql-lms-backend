@@ -18,15 +18,25 @@ CREATE TABLE test_data (
     optionC TEXT,
     correct VARCHAR(10),
     explaination TEXT,
-    paper_year SMALLTINT,
+    paper_year SMALLINT,
     difficulty VARCHAR(10)
-)
+);
 
 CREATE TABLE user_overall_data (
-    userId UUID FOREIGN KEY,
+    userId UUID REFERENCES users,
     subject VARCHAR(128),
     totalSolved INT,
     totalCorrect INT,
     totalIncorrect INT
-)
+);
 
+CREATE DATABASE lms WITH OWNER postgres;
+\c lms;
+CREATE TABLE random (
+  name VARCHAR(128),
+  email VARCHAR(128)
+);
+
+INSERT INTO random(name, email) VALUES ('emily', 'emily@gmail.com');
+
+ 
