@@ -28,6 +28,5 @@ jobs:
       - run: npm run test
         env:
           CI: true
-      - run: tsc
-      - if: ${{ contains(toJson(github.event.commits.*.message), '#skip')}}
-        run: echo "skip is present in the commit"
+      - name: build the app
+        run: tsc
