@@ -29,15 +29,5 @@ jobs:
         env:
           CI: true
       - run: tsc
-      - name: git event
-        run: echo "$EVENT"
-        env:
-          EVENT: ${{ toJson(github.event )}}
-      - name: git commits
-        run: echo "$COMMIT"
-        env:
-          COMMIT: ${{ toJson( github.event.commits )}}
-      - name: git messages commit
-        run: echo "$MESSAGE"
-        env:
-          MESSAGE: ${{ toJson( github.event.commits.*.message )}}
+      - if: ${{ !contains(toJson(github.event.commits.*.message), "#skip")}}
+        run: echo "skip is present in the commit"
