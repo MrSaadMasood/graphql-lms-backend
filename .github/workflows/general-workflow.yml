@@ -26,9 +26,6 @@ jobs:
           compose-file: "./server/docker-compose.dev.yml"
           down-flags: "--volumes --rmi all"
       - run: npm run test
-<<<<<<< HEAD:.github/workflows/action.yml
         env:
           CI: true
       - run: tsc
-=======
->>>>>>> 4b050ff (added):.github/workflows/general-workflow.yml
