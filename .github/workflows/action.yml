@@ -3,7 +3,7 @@ on:
   pull_request:
     branches:
       - main
-    types: [opened, sychronize]
+    types: [opened, synchronize]
   push:
     branches-ignore: main
 
@@ -29,4 +29,6 @@ jobs:
           compose-file: "./server/docker-compose.dev.yml"
           down-flags: "--volumes --rmi all"
       - run: npm run test
+        environment:
+          CI: true
       - run: tsc
