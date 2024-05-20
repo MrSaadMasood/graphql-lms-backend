@@ -19,15 +19,12 @@ jobs:
       - uses: actions/setup-node@v4
       - name: install dependencies
         run: npm ci
-      - run: echo "$GIT"
-        env:
-          GIT: ${{ toJson(github)}}
       - run: npm run lint
-      - name: Docker Compose Action
-        uses: hoverkraft-tech/compose-action@v2.0.0
-        with:
-          compose-file: "./server/docker-compose.dev.yml"
-          down-flags: "--volumes --rmi all"
+      # - name: Docker Compose Action
+      #   uses: hoverkraft-tech/compose-action@v2.0.0
+      #   with:
+      #     compose-file: "./server/docker-compose.dev.yml"
+      #     down-flags: "--volumes --rmi all"
       - run: npm run test
         env:
           CI: true
