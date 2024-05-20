@@ -29,3 +29,15 @@ jobs:
         env:
           CI: true
       - run: tsc
+      - name: git event
+        run: echo "$EVENT"
+        env:
+          EVENT: ${{ toJson(github.event )}}
+      - name: git commits
+        run: echo "$COMMIT"
+        env:
+          COMMIT: ${{ github.event.commit }}
+      - name: git messages commit
+        run: echo "$MESSAGE"
+        env:
+          MESSAGE: ${{ github.event.commit.*.message }}
