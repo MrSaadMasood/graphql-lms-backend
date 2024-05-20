@@ -1,0 +1,23 @@
+name: tag version
+on:
+  pull_request:
+    types:
+      - closed
+    branches: main
+
+jobs:
+  tag-increaser:
+    if: ${{ github.event.pull_request.merged == true }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: checkout branches
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: bump version
+        uses: anotherNick/github-tag-action@v1.67.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
+          WITH_V: true
