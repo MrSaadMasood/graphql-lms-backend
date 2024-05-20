@@ -20,21 +20,12 @@ jobs:
       - name: install dependencies
         run: npm ci
       - run: npm run lint
-      # - name: Docker Compose Action
-      #   uses: hoverkraft-tech/compose-action@v2.0.0
-      #   with:
-      #     compose-file: "./server/docker-compose.dev.yml"
-      #     down-flags: "--volumes --rmi all"
+      - name: Docker Compose Action
+        uses: hoverkraft-tech/compose-action@v2.0.0
+        with:
+          compose-file: "./server/docker-compose.dev.yml"
+          down-flags: "--volumes --rmi all"
       - run: npm run test
         env:
           CI: true
       - run: tsc
-    # adding_tags:
-    #   needs: [pipeline]
-    #   permisssions:
-    #     content: write
-    #   if: ${{ github.refs == 'refs/heads/main' && github.event_name == 'pull_request' }}
-    #   steps:
-    #     name: chockout second
-    #     uses: aenvironmentctions/checkout@v4
-    #
