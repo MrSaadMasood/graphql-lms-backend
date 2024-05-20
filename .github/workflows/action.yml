@@ -5,6 +5,7 @@ on:
       - main
     types: [opened, sychronize]
   push:
+    branches-ignore: main
 
 jobs:
   pipeline:
@@ -20,7 +21,7 @@ jobs:
       - name: install dependencies
         run: npm ci
       - run: echo "$GIT"
-        environment:
+        env:
           GIT: ${{ toJson(github)}}
       - run: npm run lint
       - run: tsc
