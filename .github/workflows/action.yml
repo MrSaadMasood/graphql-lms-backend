@@ -18,7 +18,8 @@ jobs:
         run: npm ci
       - run: npm run lint
       - run: tsc
-      - uses: hoverkraft-tech/compose-action@v0.0.0
+      - name: Docker Compose Action
+        uses: hoverkraft-tech/compose-action@v2.0.0
         with:
           compose-file: "./docker-compose.dev.yml"
       - run: npm run test
