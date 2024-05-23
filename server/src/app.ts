@@ -2,14 +2,14 @@ import { ApolloServer } from '@apollo/server';
 import express from 'express';
 import { expressMiddleware } from '@apollo/server/express4';
 import { createApplication } from 'graphql-modules';
-import { bookmodule } from './query/book/book.module';
+import authModule from './query/auth/auth.module';
 
 const app = express();
 
 const application = createApplication({
-  modules: [bookmodule],
+  modules: [authModule],
 });
-console.log('added for workflows');
+
 const executor = application.createApolloExecutor();
 const schema = application.schema;
 
@@ -28,6 +28,7 @@ const apolloServer = new ApolloServer({
 
 async function server() {
   try {
+    if (process.env.NODE_ENV === 'test') return;
     await apolloServer.start();
     app.use('/', express.json(), expressMiddleware(apolloServer));
     app.listen(3000, () => console.log(`the server is started at port `));
@@ -38,5 +39,6 @@ async function server() {
 }
 
 server();
+
 export default apolloServer;
 export { app };

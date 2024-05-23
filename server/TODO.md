@@ -1,14 +1,14 @@
 # Todo For Backend
 
-[x] - start a simple server using graphql and wit the postgres attached
+[ x ] - start a simple server using graphql and wit the postgres attached
 
 [ x ] - write endpoint for a simple insert operation
 
-[ ] - write tests for the 2 endpoints
+[ x ] - write tests for the 2 endpoints
 
-[ ] - Sign up route for users with free 300 tokens
+[ x ] - Sign up route for users with free 300 tokens
 
-[ ] - login with google / clerk ( seperate access and refresh tokens for the admins and normal users)
+[ x ] - login with google / clerk ( seperate access and refresh tokens for the admins and normal users)
 
 [ ] - Reduce token number on solving free tests
 
