@@ -3,9 +3,10 @@ on:
   pull_request:
     branches:
       - main
-    types: [opened, sychronize]
+    types: [opened, synchronize]
   push:
-    branches-ignore: main
+    branches-ignore:
+      - main
 
 jobs:
   pipeline:
@@ -27,6 +28,12 @@ jobs:
           down-flags: "--volumes --rmi all"
       - run: npm run test
         env:
-          CI: true
+          CI: true,
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }},
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }},
+          REFRESH_SECRET_ADMIN: ${{ secrets.REFRESH_SECRET_ADMIN }},
+          ACCESS_SECRET_ADMIN: ${{ secrets.ACCESS_SECRET_ADMIN }},
+          REFRESH_SECRET_USER: ${{ secrets. REFRESH_SECRET_USER }},
+          ACCESS_SECRET_USER: ${{ secrets. ACCESS_SECRET_USER }}
       - name: build the app
         run: tsc
