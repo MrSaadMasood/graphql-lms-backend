@@ -33,7 +33,7 @@ jobs:
           GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }},
           REFRESH_SECRET_ADMIN: ${{ secrets.REFRESH_SECRET_ADMIN }},
           ACCESS_SECRET_ADMIN: ${{ secrets.ACCESS_SECRET_ADMIN }},
-          REFRESH_SECRET_USER: ${{ secrets. REFRESH_SECRET_USER }},
-          ACCESS_SECRET_USER: ${{ secrets. ACCESS_SECRET_USER }}
+          REFRESH_SECRET_USER: ${{ secrets.REFRESH_SECRET_USER }},
+          ACCESS_SECRET_USER: ${{ secrets.ACCESS_SECRET_USER }}
       - name: build the app
         run: tsc
