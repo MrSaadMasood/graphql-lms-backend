@@ -11,7 +11,8 @@ import { signUpUserQuery, storeRefreshTokenQuery } from '../../sqlQueries/reused
 import { createGoogleUserTransaction } from '../../sqlQueries/transactions';
 import { GraphQLError } from 'graphql';
 import { refreshGoogleAccessToken } from '../../utils/refreshGoogleAccessToken';
-
+import dotenv from 'dotenv';
+dotenv.config();
 type UserInfoToCreateToken = {
   password: string;
   id: string;
@@ -19,8 +20,13 @@ type UserInfoToCreateToken = {
   login_method: UserLoginMethod;
 };
 
-const { GOOGLE_CLIENT_ID, REFRESH_SECRET_USER, ACCESS_SECRET_USER, REFRESH_SECRET_ADMIN } = env;
-console.log('the secrets are', REFRESH_SECRET_USER, 'the access secret is', ACCESS_SECRET_USER);
+const { GOOGLE_CLIENT_ID, REFRESH_SECRET_USER, REFRESH_SECRET_ADMIN } = env;
+console.log(
+  'the secrets are',
+  process.env.REFRESH_SECRET_USER,
+  'the access secret is',
+  process.env.ACCESS_SECRET_USER,
+);
 
 export async function LoginUser(
   _parent: unknown,
