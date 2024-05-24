@@ -37,4 +37,4 @@ jobs:
           ACCESS_SECRET_USER: ${{ secrets.ACCESS_SECRET_USER }}
       - name: build the app
         run: tsc
-      - run: echo "this is the secret ${{ env.ACCESS_SECRET_USER }}"
+      - run: echo "this is the secret ${{ env.ACCESS_SECRET_USER }} "
