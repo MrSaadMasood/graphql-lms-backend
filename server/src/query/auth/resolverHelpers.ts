@@ -19,16 +19,10 @@ type UserInfoToCreateToken = {
   login_method: UserLoginMethod;
 };
 
-const {
-  GOOGLE_CLIENT_ID,
-  ACCESS_SECRET_USER,
-  ACCESS_SECRET_ADMIN,
-  REFRESH_SECRET_USER,
-  REFRESH_SECRET_ADMIN,
-} = env;
+const { GOOGLE_CLIENT_ID, REFRESH_SECRET_USER, REFRESH_SECRET_ADMIN } = env;
 
 export async function LoginUser(
-  _parent: {},
+  _parent: unknown,
   { input: { email, password } }: { input: LoginUserInput },
 ) {
   const user = await pg.query<UserInfoToCreateToken>(`select * from users where email = $1`, [
@@ -51,7 +45,7 @@ export async function LoginUser(
 }
 
 export async function SignUpUser(
-  _parent: {},
+  _parent: unknown,
   { input: { first_name, last_name, email, password, login_method } }: { input: CreateUserInput },
 ) {
   const hashedPassword = await bcrypt.hash(password, 10);
@@ -70,7 +64,7 @@ export async function SignUpUser(
   return { isSuccess: true };
 }
 
-export async function GoogleLogin(_parent: {}, { code }: { code: string }) {
+export async function GoogleLogin(_parent: unknown, { code }: { code: string }) {
   const decodedCode = decodeURIComponent(code);
   const { tokens } = await oAuth2Client.getToken(decodedCode);
   if (!tokens || !tokens.id_token) throw new DbError('failed to extract tokends from google code');
@@ -118,7 +112,7 @@ export async function GoogleLogin(_parent: {}, { code }: { code: string }) {
 }
 
 export async function RefreshUser(
-  _parent: {},
+  _parent: unknown,
   { input: { refreshToken, login_method, role } }: { input: RefreshUserInput },
 ) {
   const decodedRefreshToken = decodeURIComponent(refreshToken);

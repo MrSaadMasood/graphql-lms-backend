@@ -15,7 +15,7 @@ describe('should test the refresh accesstoken functinality', () => {
   }
 }`,
     variables: {
-      input: loggedInUser!,
+      input: {} as Omit<Tokens, 'accessToken'>,
     },
   };
   it('shoudl successfully refresh the token', async () => {

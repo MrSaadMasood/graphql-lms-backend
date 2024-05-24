@@ -4,7 +4,7 @@ import { app } from '../../app';
 
 type query = {
   query: string;
-  variables: any;
+  variables: unknown;
 };
 
 const api = request(app);
