@@ -25,7 +25,7 @@ jobs:
         env:
           DECRYPT_ENV_SECRET: ${{ secrets.DECRYPT_ENV_SECRET }}
         run: |
-          ll -a
+          ls -a
           chmod +x ./decrypt_env.sh
           ./decrypt_env.sh
       - name: Docker Compose Action
