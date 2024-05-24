@@ -25,7 +25,9 @@ export const loginUserQuery = {
   query: `mutation loginUser($input: LoginUserInput!) {
   LoginUser(input: $input) {
     accessToken,
-    refreshToken
+    refreshToken,
+    login_method,
+    role
   }
 }`,
   variables: {

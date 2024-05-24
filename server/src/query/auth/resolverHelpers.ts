@@ -117,7 +117,9 @@ export async function RefreshUser(
 ) {
   const decodedRefreshToken = decodeURIComponent(refreshToken);
   if (login_method === 'google') {
+    console.log('inside the google refresh token make');
     const credentials = await refreshGoogleAccessToken(decodedRefreshToken);
+    console.log('the credentials are ', credentials);
     return { accessToken: credentials.access_token };
   }
   const secretToUse = role === 'admin' ? REFRESH_SECRET_ADMIN : REFRESH_SECRET_USER;
@@ -125,7 +127,6 @@ export async function RefreshUser(
     id: string;
     role: UserRole;
   };
-  console.log('The verified token is in the refresh user', verifiedToken);
   if (!verifiedToken) throw new AuthorizationError('cannot renew the session! Please log in');
   const { accessToken } = generateAccessRefreshToken({
     id: verifiedToken.id,

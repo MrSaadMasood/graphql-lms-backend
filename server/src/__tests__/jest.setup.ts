@@ -6,10 +6,14 @@ jest.mock('../utils/dirname.ts', () => ({
   __dirname: `${process.cwd()}/src/utils/`,
 }));
 
-jest.mock('../utils/refreshGoogleAccessToken.ts', () => {
-  return Promise.resolve({
-    access_token: 'googleRefreshedToken',
-  });
+jest.mock('../utils/refreshGoogleAccessToken', () => {
+  return {
+    refreshGoogleAccessToken: jest.fn(() =>
+      Promise.resolve({
+        access_token: 'googleRefreshedToken',
+      }),
+    ),
+  };
 });
 beforeAll(async () => {
   await apolloServer.start();
