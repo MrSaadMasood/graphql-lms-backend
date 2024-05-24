@@ -4,6 +4,9 @@ import { apiPost, loginUserQuery } from '../testUtils/testUtils';
 describe('tests the login functinality', () => {
   it('should succesfully log the user in', async () => {
     const response = await apiPost(loginUserQuery);
+    console.log('the response from login is', response.body.data);
+    console.log('the response from login is', response.body.errors);
+
     expect(response.body.data.LoginUser).toEqual(
       expect.objectContaining({
         accessToken: expect.any(String),
