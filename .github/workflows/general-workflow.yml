@@ -24,8 +24,10 @@ jobs:
       - name: decrypt .env file
         env:
           DECRYPT_ENV_SECRET: ${{ secrets.DECRYPT_ENV_SECRET }}
-        # run: ./decrypt_env.sh
-        run: echo "the secret is $DECRYPT_ENV_SECRET and while this is the second one ${{ secrets.DECRYPT_ENV_SECRET}}"
+        run: |
+          echo ll -a
+
+          ./decrypt_env.sh
       - name: Docker Compose Action
         uses: hoverkraft-tech/compose-action@v2.0.0
         with:
