@@ -21,6 +21,10 @@ jobs:
       - name: install dependencies
         run: npm ci
       - run: npm run lint
+      - name: decrypt .env file
+        env:
+          DECRYPT_ENV_SECRET: ${{ secrets.DECRYPT_ENV_SECRET }},
+        run: ./decrypt_env.sh
       - name: Docker Compose Action
         uses: hoverkraft-tech/compose-action@v2.0.0
         with:
@@ -39,4 +43,4 @@ jobs:
         run: tsc
       - env:
           GOOGLE_CLIENT_ID: ${{ secrets.ACCESS_SECRET_USER}},
-        run: echo "this is the secret '${{ env.ACCESS_SECRET_USER }}' "'
+        run: echo "cat .env"'
