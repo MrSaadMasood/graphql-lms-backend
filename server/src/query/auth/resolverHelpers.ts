@@ -19,7 +19,8 @@ type UserInfoToCreateToken = {
   login_method: UserLoginMethod;
 };
 
-const { GOOGLE_CLIENT_ID, REFRESH_SECRET_USER, REFRESH_SECRET_ADMIN } = env;
+const { GOOGLE_CLIENT_ID, REFRESH_SECRET_USER, ACCESS_SECRET_USER, REFRESH_SECRET_ADMIN } = env;
+console.log('the secrets are', REFRESH_SECRET_USER, 'the access secret is', ACCESS_SECRET_USER);
 
 export async function LoginUser(
   _parent: unknown,
