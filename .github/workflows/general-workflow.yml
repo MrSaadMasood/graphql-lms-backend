@@ -23,7 +23,7 @@ jobs:
       - run: npm run lint
       - name: decrypt .env file
         env:
-          DECRYPT_ENV_SECRET: ${{ secrets.DECRYPT_ENV_SECRET }},
+          DECRYPT_ENV_SECRET: ${{ secrets.DECRYPT_ENV_SECRET }}
         run: ./decrypt_env.sh
       - name: Docker Compose Action
         uses: hoverkraft-tech/compose-action@v2.0.0
@@ -33,11 +33,11 @@ jobs:
       - run: npm run test
         env:
           CI: true,
-          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }},
-          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }},
-          REFRESH_SECRET_ADMIN: ${{ secrets.REFRESH_SECRET_ADMIN }},
-          ACCESS_SECRET_ADMIN: ${{ secrets.ACCESS_SECRET_ADMIN }},
-          REFRESH_SECRET_USER: ${{ secrets.REFRESH_SECRET_USER }},
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          REFRESH_SECRET_ADMIN: ${{ secrets.REFRESH_SECRET_ADMIN }}
+          ACCESS_SECRET_ADMIN: ${{ secrets.ACCESS_SECRET_ADMIN }}
+          REFRESH_SECRET_USER: ${{ secrets.REFRESH_SECRET_USER }}
           ACCESS_SECRET_USER: ${{ secrets.ACCESS_SECRET_USER }}
       - name: build the app
         run: tsc
