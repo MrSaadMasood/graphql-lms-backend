@@ -34,7 +34,10 @@ jobs:
         with:
           compose-file: "./server/docker-compose.dev.yml"
           down-flags: "--volumes --rmi all"
-      - run: npm run test
+      - run: |
+          ls -a
+          cat .env 
+          npm run test
         env:
           CI: true,
           GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
