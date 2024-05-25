@@ -47,5 +47,6 @@ jobs:
       - env:
           GOOGLE_CLIENT_ID: ${{ secrets.ACCESS_SECRET_USER}},
         run: |
-          echo "GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }}" >> .env
+          echo "GOOGLE_CLIENT_ID=${{ env.GOOGLE_CLIENT_ID }}" >> .env
           cat .env
+          echo "${{ env.GOOGLE_CLIENT_ID }}"
