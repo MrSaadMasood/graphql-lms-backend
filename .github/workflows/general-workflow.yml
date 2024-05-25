@@ -49,4 +49,4 @@ jobs:
         run: tsc
       - env:
           GOOGLE_CLIENT_ID: ${{ secrets.ACCESS_SECRET_USER}},
-        run: echo "${{ secrets.ACCESS_SECRET_USER }}"
+        run: echo "${{ env.ACCESS_SECRET_USER }}"
