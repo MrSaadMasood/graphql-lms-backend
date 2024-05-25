@@ -1,5 +1,5 @@
 /* eslint-disable */
-import * as Types from "../../__generated__/__generated__/graphql";
+import * as Types from "./graphql";
 import * as gm from "graphql-modules";
 export namespace QueryModule {
   interface DefinedFields {
@@ -9,13 +9,13 @@ export namespace QueryModule {
     Query: 'dummy';
     Mutation: 'SignUpUser' | 'LoginUser' | 'RefreshUser' | 'GoogleLogin';
   };
-  
+
   interface DefinedInputFields {
     LoginUserInput: 'email' | 'password';
     CreateUserInput: 'first_name' | 'last_name' | 'email' | 'password' | 'login_method';
     RefreshUserInput: 'refreshToken' | 'login_method' | 'role';
   };
-  
+
   export type Success = Pick<Types.Success, DefinedFields['Success']>;
   export type AccessToken = Pick<Types.AccessToken, DefinedFields['AccessToken']>;
   export type Tokens = Pick<Types.Tokens, DefinedFields['Tokens']>;
@@ -24,17 +24,17 @@ export namespace QueryModule {
   export type CreateUserInput = Pick<Types.CreateUserInput, DefinedInputFields['CreateUserInput']>;
   export type RefreshUserInput = Pick<Types.RefreshUserInput, DefinedInputFields['RefreshUserInput']>;
   export type Mutation = Pick<Types.Mutation, DefinedFields['Mutation']>;
-  
+
   export type Scalars = Pick<Types.Scalars, 'NonEmptyString' | 'Email'>;
   export type NonEmptyStringScalarConfig = Types.NonEmptyStringScalarConfig;
   export type EmailScalarConfig = Types.EmailScalarConfig;
-  
+
   export type SuccessResolvers = Pick<Types.SuccessResolvers, DefinedFields['Success'] | '__isTypeOf'>;
   export type AccessTokenResolvers = Pick<Types.AccessTokenResolvers, DefinedFields['AccessToken'] | '__isTypeOf'>;
   export type TokensResolvers = Pick<Types.TokensResolvers, DefinedFields['Tokens'] | '__isTypeOf'>;
   export type QueryResolvers = Pick<Types.QueryResolvers, DefinedFields['Query']>;
   export type MutationResolvers = Pick<Types.MutationResolvers, DefinedFields['Mutation']>;
-  
+
   export interface Resolvers {
     Success?: SuccessResolvers;
     AccessToken?: AccessTokenResolvers;
@@ -44,7 +44,7 @@ export namespace QueryModule {
     NonEmptyString?: Types.Resolvers['NonEmptyString'];
     Email?: Types.Resolvers['Email'];
   };
-  
+
   export interface MiddlewareMap {
     '*'?: {
       '*'?: gm.Middleware[];
