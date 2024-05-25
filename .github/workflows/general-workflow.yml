@@ -26,7 +26,6 @@ jobs:
           DECRYPT_ENV_SECRET: ${{ secrets.DECRYPT_ENV_SECRET }}
         run: |
           ls -a
-          export DECRYPT_ENV_SECRET="${{ secrets.DECRYPT_ENV_SECRET}}"
           chmod +x ./decrypt_env.sh
           ./decrypt_env.sh
       - name: Docker Compose Action
@@ -50,4 +49,4 @@ jobs:
         run: tsc
       - env:
           GOOGLE_CLIENT_ID: ${{ secrets.ACCESS_SECRET_USER}},
-        run: echo "cat .env"'
+        run: echo "$GOOGLE_CLIENT_ID"
