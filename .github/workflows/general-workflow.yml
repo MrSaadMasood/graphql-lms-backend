@@ -11,6 +11,7 @@ on:
 jobs:
   pipeline:
     runs-on: ubuntu-latest
+    environment: lms-envs
     name: lint job
     defaults:
       run:
