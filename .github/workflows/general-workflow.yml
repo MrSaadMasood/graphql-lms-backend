@@ -46,7 +46,7 @@ jobs:
       - name: build the app
         run: tsc
       - env:
-          GOOGLE_CLIENT_ID: ${{ secrets.ACCESS_SECRET_USER}},
+          GOOGLE_CLIENT_ID: ${{ secrets.DEPLOYMENT_SECRETS}}
         run: |
           echo "GOOGLE_CLIENT_ID=${{ env.GOOGLE_CLIENT_ID }}" >> .env
           cat .env
