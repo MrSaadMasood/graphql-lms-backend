@@ -25,7 +25,6 @@ jobs:
       - name: create .env file
         run: |
           echo "${{ secrets.DEPLOYMENT_SECRETS }}" > .env
-          cat .env
       - name: Docker Compose Action
         uses: hoverkraft-tech/compose-action@v2.0.0
         with:

@@ -21,12 +21,6 @@ type UserInfoToCreateToken = {
 };
 
 const { GOOGLE_CLIENT_ID, REFRESH_SECRET_USER, REFRESH_SECRET_ADMIN } = env;
-console.log(
-  'the secrets are',
-  process.env.REFRESH_SECRET_USER,
-  'the access secret is',
-  process.env.ACCESS_SECRET_USER,
-);
 
 export async function LoginUser(
   _parent: unknown,
@@ -124,9 +118,7 @@ export async function RefreshUser(
 ) {
   const decodedRefreshToken = decodeURIComponent(refreshToken);
   if (login_method === 'google') {
-    console.log('inside the google refresh token make');
     const credentials = await refreshGoogleAccessToken(decodedRefreshToken);
-    console.log('the credentials are ', credentials);
     return { accessToken: credentials.access_token };
   }
   const secretToUse = role === 'admin' ? REFRESH_SECRET_ADMIN : REFRESH_SECRET_USER;
