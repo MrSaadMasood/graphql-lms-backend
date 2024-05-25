@@ -21,22 +21,19 @@ jobs:
       - name: install dependencies
         run: npm ci
       - run: npm run lint
-      - name: decrypt .env file
-        env:
-          DECRYPT_ENV_SECRET: ${{ secrets.DECRYPT_ENV_SECRET }}
-        run: |
-          ls -a
-          chmod +x ./decrypt_env.sh
-          ./decrypt_env.sh
+      # - name: decrypt .env file
+      #   env:
+      #     DECRYPT_ENV_SECRET: ${{ secrets.DECRYPT_ENV_SECRET }}
+      #   run: |
+      #     ls -a
+      #     chmod +x ./decrypt_env.sh
+      #     ./decrypt_env.sh
       - name: Docker Compose Action
         uses: hoverkraft-tech/compose-action@v2.0.0
         with:
           compose-file: "./server/docker-compose.dev.yml"
           down-flags: "--volumes --rmi all"
-      - run: |
-          ls -a
-          cat .env 
-          npm run test
+      - run: npm run test
         env:
           CI: true,
           GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
@@ -49,4 +46,5 @@ jobs:
         run: tsc
       - env:
           GOOGLE_CLIENT_ID: ${{ secrets.ACCESS_SECRET_USER}},
-        run: echo "${{ env.ACCESS_SECRET_USER }}"
+        run: |
+          echo "GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }}" >> .env
