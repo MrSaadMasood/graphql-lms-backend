@@ -1,2 +1,2 @@
-type UserRole = "user" | "admin"
-type UserLoginMethod = "normal" | "google"
+type UserRole = 'user' | 'admin';
+type UserLoginMethod = 'normal' | 'google';
