@@ -1,13 +1,24 @@
 import { generateAccessRefreshToken } from './authUtils';
 import jwt from 'jsonwebtoken';
 import { v4 as uuid } from 'uuid';
-import { AuthorizationError, DbError, InputValidationError } from '../../customErrors/errors';
+import {
+  AuthorizationError,
+  DbError,
+  InputValidationError,
+} from '../../customErrors/errors';
 import bcrypt from 'bcryptjs';
 import pg from '../../postgresClient/pgClient';
-import { CreateUserInput, LoginUserInput, RefreshUserInput } from '../../__generated__/graphql';
+import {
+  CreateUserInput,
+  LoginUserInput,
+  RefreshUserInput,
+} from '../../__generated__/graphql';
 import oAuth2Client from '../../utils/oAuth2Client';
 import env from '../../zodSchema/envValidator';
-import { signUpUserQuery, storeRefreshTokenQuery } from '../../sqlQueries/reusedSQLQueries';
+import {
+  signUpUserQuery,
+  storeRefreshTokenQuery,
+} from '../../sqlQueries/reusedSQLQueries';
 import { createGoogleUserTransaction } from '../../sqlQueries/transactions';
 import { GraphQLError } from 'graphql';
 import { refreshGoogleAccessToken } from '../../utils/refreshGoogleAccessToken';
@@ -26,16 +37,23 @@ export async function LoginUser(
   _parent: unknown,
   { input: { email, password } }: { input: LoginUserInput },
 ) {
-  const user = await pg.query<UserInfoToCreateToken>(`select * from users where email = $1`, [
-    email,
-  ]);
+  const user = await pg.query<UserInfoToCreateToken>(
+    `select * from users where email = $1`,
+    [email],
+  );
   const { password: hashedPassword, role, id, login_method } = user.rows[0];
 
   if (login_method !== 'normal') throw new AuthorizationError();
   const passwordMatch = await bcrypt.compare(password, hashedPassword);
   if (!passwordMatch) throw new InputValidationError();
-  const { accessToken, refreshToken } = generateAccessRefreshToken({ id, role });
-  const storeRefreshToken = await pg.query(storeRefreshTokenQuery, [id, refreshToken]);
+  const { accessToken, refreshToken } = generateAccessRefreshToken({
+    id,
+    role,
+  });
+  const storeRefreshToken = await pg.query(storeRefreshTokenQuery, [
+    id,
+    refreshToken,
+  ]);
   if (!storeRefreshToken.rowCount) throw new DbError();
   return {
     accessToken,
@@ -47,7 +65,9 @@ export async function LoginUser(
 
 export async function SignUpUser(
   _parent: unknown,
-  { input: { first_name, last_name, email, password, login_method } }: { input: CreateUserInput },
+  {
+    input: { first_name, last_name, email, password, login_method },
+  }: { input: CreateUserInput },
 ) {
   const hashedPassword = await bcrypt.hash(password, 10);
   const signuUpUser = await pg.query(signUpUserQuery, [
@@ -65,10 +85,14 @@ export async function SignUpUser(
   return { isSuccess: true };
 }
 
-export async function GoogleLogin(_parent: unknown, { code }: { code: string }) {
+export async function GoogleLogin(
+  _parent: unknown,
+  { code }: { code: string },
+) {
   const decodedCode = decodeURIComponent(code);
   const { tokens } = await oAuth2Client.getToken(decodedCode);
-  if (!tokens || !tokens.id_token) throw new DbError('failed to extract tokends from google code');
+  if (!tokens || !tokens.id_token)
+    throw new DbError('failed to extract tokends from google code');
   const verifiedToken = await oAuth2Client.verifyIdToken({
     idToken: tokens.id_token,
     audience: GOOGLE_CLIENT_ID,
@@ -121,12 +145,14 @@ export async function RefreshUser(
     const credentials = await refreshGoogleAccessToken(decodedRefreshToken);
     return { accessToken: credentials.access_token };
   }
-  const secretToUse = role === 'admin' ? REFRESH_SECRET_ADMIN : REFRESH_SECRET_USER;
+  const secretToUse =
+    role === 'admin' ? REFRESH_SECRET_ADMIN : REFRESH_SECRET_USER;
   const verifiedToken = jwt.verify(decodedRefreshToken, secretToUse) as {
     id: string;
     role: UserRole;
   };
-  if (!verifiedToken) throw new AuthorizationError('cannot renew the session! Please log in');
+  if (!verifiedToken)
+    throw new AuthorizationError('cannot renew the session! Please log in');
   const { accessToken } = generateAccessRefreshToken({
     id: verifiedToken.id,
     role: verifiedToken.role,

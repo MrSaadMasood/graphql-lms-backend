@@ -7,7 +7,7 @@ type query = {
   variables: unknown;
 };
 
-const api = request(app);
+export const api = request(app);
 
 export const apiPost = async (query: query) => {
   return await api.post('/').send(query);

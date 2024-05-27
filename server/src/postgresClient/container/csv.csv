@@ -1,0 +1,21 @@
+id,subject,statement,option_a,option_b,option_c,correct,explanation,paper_year,difficulty
+1,Mathematics,What is the value of 2 + 2?,4,3,5,A,The sum of 2 and 2 is 4.,2023,Easy
+2,Science,Which planet is known as the Red Planet?,Earth,Mars,Venus,B,Mars is known as the Red Planet due to its reddish appearance.,2022,Medium
+3,History,Who was the first President of the United States?,George Washington,Abraham Lincoln,Thomas Jefferson,A,George Washington was the first President of the United States.,2021,Easy
+4,Geography,What is the capital of France?,Rome,Paris,Berlin,B,Paris is the capital of France.,2023,Easy
+5,Science,What is the chemical symbol for water?,H2O,CO2,O2,A,The chemical symbol for water is H2O.,2022,Easy
+6,Literature,Who wrote 'Romeo and Juliet'?,Charles Dickens,William Shakespeare,Jane Austen,B,'Romeo and Juliet' was written by William Shakespeare.,2021,Easy
+7,Mathematics,What is 10% of 200?,20,15,25,A,10% of 200 is 20.,2023,Easy
+8,Biology,What is the powerhouse of the cell?,Nucleus,Chloroplast,Mitochondria,C,The mitochondria is known as the powerhouse of the cell.,2022,Medium
+9,History,In which year did the Titanic sink?,1912,1905,1918,A,The Titanic sank in 1912.,2021,Medium
+10,Geography,Which is the largest continent by area?,Africa,Asia,Europe,B,Asia is the largest continent by area.,2023,Medium
+11,Science,What is the boiling point of water at sea level?,90°C,100°C,110°C,B,The boiling point of water at sea level is 100°C.,2022,Easy
+12,Literature,Who is the author of '1984'?,George Orwell,Mark Twain,Ernest Hemingway,A,'1984' was written by George Orwell.,2021,Medium
+13,Mathematics,What is the square root of 64?,6,7,8,C,The square root of 64 is 8.,2023,Easy
+14,Biology,What is the largest organ in the human body?,Heart,Liver,Skin,C,The skin is the largest organ in the human body.,2022,Medium
+15,History,Who was the first man to walk on the moon?,Yuri Gagarin,Neil Armstrong,Buzz Aldrin,B,Neil Armstrong was the first man to walk on the moon.,2021,Medium
+16,Geography,Which river is the longest in the world?,Amazon,Nile,Mississippi,B,The Nile is the longest river in the world.,2023,Hard
+17,Science,What is the chemical formula for table salt?,NaCl,KCl,CaCl2,A,The chemical formula for table salt is NaCl.,2022,Easy
+18,Literature,Who wrote 'Pride and Prejudice'?,Jane Austen,Charlotte Brontë,Emily Dickinson,A,'Pride and Prejudice' was written by Jane Austen.,2021,Easy
+19,Mathematics,What is the value of pi (π) to two decimal places?,3.12,3.14,3.16,B,The value of pi (π) to two decimal places is 3.14.,2023,Easy
+20,Biology,What gas do plants absorb from the atmosphere?,Oxygen,Carbon Dioxide,Nitrogen,B,Plants absorb carbon dioxide from the atmosphere.,2022,Easy

@@ -14,14 +14,14 @@ CREATE TABLE users (
 );
 
 CREATE TABLE test_data (
-    id Serial PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     subject VARCHAR(128) NOT NULL,
-    statment TEXT NOT NULL,
+    statement TEXT NOT NULL,
     option_a TEXT NOT NULL,
     option_b TEXT NOT NULL,
     option_c TEXT NOT NULL,
     correct VARCHAR(10) NOT NULL,
-    explaination TEXT,
+    explanation TEXT,
     paper_year SMALLINT NOT NULL,
     difficulty VARCHAR(10) NOT NULL
 );

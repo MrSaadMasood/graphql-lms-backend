@@ -25,8 +25,12 @@ export const createGoogleUserTransaction = async <T extends string>(
       300,
       'google',
     ]);
-    const storeRefreshToken = await pg.query(storeRefreshTokenQuery, [userId, refresh_token]);
-    if (!newGoogleUser.rowCount || !storeRefreshToken.rowCount) throw new Error();
+    const storeRefreshToken = await pg.query(storeRefreshTokenQuery, [
+      userId,
+      refresh_token,
+    ]);
+    if (!newGoogleUser.rowCount || !storeRefreshToken.rowCount)
+      throw new Error();
     await client.query('COMMIT');
   } catch (error) {
     await client.query('ROLLBACK');

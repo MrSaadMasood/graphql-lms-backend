@@ -1,4 +1,9 @@
-import { GoogleLogin, LoginUser, RefreshUser, SignUpUser } from './resolverHelpers';
+import {
+  GoogleLogin,
+  LoginUser,
+  RefreshUser,
+  SignUpUser,
+} from './resolverHelpers';
 
 const resolvers = {
   Mutation: {

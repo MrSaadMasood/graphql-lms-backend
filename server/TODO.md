@@ -18,7 +18,7 @@
 
 [ ] - get wrong mcqs explaination from the ids array
 
-[ ] - data population using the csv file upload
+[ x ] - data population using the csv file upload
 
 [ ] - search the tests database using the statement text
 
@@ -29,8 +29,6 @@
 [ ] - user personal data like total mcqs solved, total correct mcqs, total wrong mcqs, mcqs solved subject-wise.
 
 [ ] - admin dashboard data like total users who bought subsription, total free token users, total users who bought tokens
-
-[ ] - oAuthLogin for the Admins
 
 [ ] - publish total mcqs solved by all the users for realtieme data to show on the frontend
 
