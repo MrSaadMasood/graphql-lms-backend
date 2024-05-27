@@ -13,7 +13,6 @@ export const signUpUserQuery = `insert into users(
 export const storeRefreshTokenQuery = `insert into tokens(id, token) values ($1, $2)`;
 
 export const addTestDataQuery = `insert into test_data(
-    id ,
     subject,
     statement,
     option_a,
@@ -23,4 +22,4 @@ export const addTestDataQuery = `insert into test_data(
     explanation,
     paper_year,
     difficulty 
-) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)`;
+) values ($1, $2, $3, $4, $5, $6, $7, $8, $9 )`;

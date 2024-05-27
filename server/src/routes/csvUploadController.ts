@@ -33,7 +33,6 @@ export async function csvUploadController(req: Request, res: Response) {
         const insertedData = await Promise.all(
           records.map(async (record) => {
             const {
-              id,
               subject,
               statement,
               option_a,
@@ -45,7 +44,6 @@ export async function csvUploadController(req: Request, res: Response) {
               difficulty,
             } = record;
             return await pgPool.query(addTestDataQuery, [
-              parseInt(id),
               subject,
               statement,
               option_a,
