@@ -1,0 +1,50 @@
+scalar NonEmptyString
+
+input TestSearchFilters {
+    paperYear: Int
+    searchText : NonEmptyString!
+    paperSubject: String 
+    academyName : NonEmptyString!
+  }
+type UpdateMCQOutput {
+    id: Int!
+    statement: String!
+    option_a : String!
+    option_b : String!
+    option_c : String!
+    correct : String!
+    explanation : String!
+    subject : String!
+    paper_year : Int!
+    paper_category : String!
+    difficulty : String!
+  } 
+input UpdateMCQInput {
+    id: Int!
+    statement: NonEmptyString!
+    option_a : NonEmptyString!
+    option_b : NonEmptyString!
+    option_c : NonEmptyString!
+    correct : NonEmptyString!
+    explanation : NonEmptyString!
+    subject : NonEmptyString!
+    paper_year : Int!
+    paper_category : NonEmptyString!
+    difficulty : NonEmptyString!
+  }
+type MCQSearchResult {
+    id : Int!
+    statement : String!
+  }
+
+type Query {
+  SearchMCQBasedOnFilters(input: TestSearchFilters!) : [MCQSearchResult!]!
+  GetSpecificMCQ(id : Int!) : UpdateMCQOutput!
+  GetAllMCQBasedOnAcademy(academyName : NonEmptyString!, offset : Int!) : [MCQSearchResult!]!
+  }
+type Mutation {
+     UpdateTestMCQ(input: UpdateMCQInput!) : Boolean!
+     DeleteTestMCQ (id : Int!) : Boolean!
+  }
+
+
