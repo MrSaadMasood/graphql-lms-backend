@@ -10,31 +10,34 @@
 
 [ x ] - login with google / clerk ( seperate access and refresh tokens for the admins and normal users)
 
-[ ] - Reduce token number on solving free tests
+[ x ] - Reduce token number on solving free tests
 
-[ ] - buy token router using half the price of the subsription
+[ x ] - buy token router using half the price of the subsription
 
-[ ] - get tests route based on the option selected ( subject-wise, random, year-wise)
-
-[ ] - get wrong mcqs explaination from the ids array
+[ x ] - get tests route based on the option selected ( subject-wise, random, year-wise)
 
 [ x ] - data population using the csv file upload
 
-[ ] - search the tests database using the statement text
+[ x ] - update the test database row
 
-[ ] - update the test database row
+[ x ] - get a single mcq data admin
 
-[ ] - delete a test database row
+[ x ]- get mcqs based on the academy name admin
 
-[ ] - user personal data like total mcqs solved, total correct mcqs, total wrong mcqs, mcqs solved subject-wise.
+[ x ] - delete a test database row
+
+[ x ] - user personal data like total mcqs solved, total correct mcqs,
+total wrong mcqs, mcqs solved subject-wise.
+
+[ x ] - store user personal test data
 
 [ ] - admin dashboard data like total users who bought subsription, total free token users, total users who bought tokens
 
 [ ] - publish total mcqs solved by all the users for realtieme data to show on the frontend
 
-[ ] - implement advanced search for adming dashboard where the admin can filter the mcqs based on the
+[ x ] - implement advanced search for adming dashboard where the admin can filter the mcqs based on the
 year, subject and text
 
-[ ] - implement pagination for the searched mcqs
+[ x ] - implement pagination for the searched mcqs
 
 [ ] - implement realtime collaboration for the users to take tests together with synchronization
