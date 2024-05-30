@@ -21,7 +21,7 @@ export const createGoogleUserTransaction = async <T extends string>(
       email,
       at_hash,
       'user',
-      false,
+      "none",
       300,
       'google',
     ]);
