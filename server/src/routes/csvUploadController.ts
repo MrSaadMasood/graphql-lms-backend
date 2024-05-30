@@ -16,6 +16,8 @@ type TestData = {
   explanation: string;
   paper_year: string;
   difficulty: string;
+  paper_category: string;
+  academy_name: string
 };
 export async function csvUploadController(req: Request, res: Response) {
   try {
@@ -35,6 +37,8 @@ export async function csvUploadController(req: Request, res: Response) {
             const {
               subject,
               statement,
+              paper_category,
+              academy_name,
               option_a,
               option_b,
               option_c,
@@ -45,6 +49,8 @@ export async function csvUploadController(req: Request, res: Response) {
             } = record;
             return await pgPool.query(addTestDataQuery, [
               subject,
+              paper_category,
+              academy_name,
               statement,
               option_a,
               option_b,
@@ -64,6 +70,6 @@ export async function csvUploadController(req: Request, res: Response) {
         return res.json(insertedRowCount);
       });
   } catch (error) {
-    res.json(error);
+    res.json("failed to load the data the File");
   }
 }
