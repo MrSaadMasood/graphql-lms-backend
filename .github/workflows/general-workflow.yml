@@ -22,6 +22,7 @@ jobs:
       - name: install dependencies
         run: npm ci
       - run: npm run lint
+      - run: npm run pretty
       - name: create .env file
         run: |
           echo "${{ secrets.DEPLOYMENT_SECRETS }}" > .env
