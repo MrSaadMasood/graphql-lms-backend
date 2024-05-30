@@ -80,7 +80,7 @@ export async function SignUpUser(
     email,
     hashedPassword,
     'user',
-    false,
+    "none",
     300,
     login_method,
   ]);
