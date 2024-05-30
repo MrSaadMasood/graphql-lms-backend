@@ -4,16 +4,17 @@ import express from 'express';
 import { expressMiddleware } from '@apollo/server/express4';
 import { createApplication } from 'graphql-modules';
 import authModule from './query/auth/auth.module';
-
+import tokensModule from "./query/tokenManager/tokenManager.module"
+import userModule from "./query/user/user.module"
+import adminModule from "./query/admin/admin.module"
 const app = express();
 app.use(express.json());
 const application = createApplication({
-  modules: [authModule],
+  modules: [authModule, tokensModule, userModule, adminModule],
 });
 
 const executor = application.createApolloExecutor();
 const schema = application.schema;
-
 const apolloServer = new ApolloServer({
   gateway: {
     async load() {
@@ -21,9 +22,9 @@ const apolloServer = new ApolloServer({
     },
     onSchemaLoadOrUpdate(callback) {
       callback({ apiSchema: schema, coreSupergraphSdl: '' });
-      return () => {};
+      return () => { };
     },
-    async stop() {},
+    async stop() { },
   },
 });
 
