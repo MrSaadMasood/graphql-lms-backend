@@ -42,22 +42,22 @@ export async function LoginUser(
     [email],
   );
   const { password: hashedPassword, role, id, login_method } = user.rows[0];
-  console.log("the request has reached here")
+   
   if (login_method !== 'normal') throw new AuthorizationError();
   const passwordMatch = await bcrypt.compare(password, hashedPassword);
   if (!passwordMatch) throw new InputValidationError();
-  console.log("the passsed is matching ")
+   
   const { accessToken, refreshToken } = generateAccessRefreshToken({
     id,
     role,
   });
-  console.log("before doing the query")
+   
   const storeRefreshToken = await pg.query(storeRefreshTokenQuery, [
     id,
     refreshToken,
   ]);
   if (!storeRefreshToken.rowCount) throw new DbError();
-  console.log("sending the password to the usr")
+   
   return {
     accessToken,
     login_method,
