@@ -3,13 +3,15 @@ on:
   pull_request:
     branches:
       - main
-    types: [opened, sychronize]
+    types: [opened, synchronize]
   push:
-    branches-ignore: main
+    branches-ignore:
+      - main
 
 jobs:
   pipeline:
     runs-on: ubuntu-latest
+    environment: deployment
     name: lint job
     defaults:
       run:
@@ -20,6 +22,10 @@ jobs:
       - name: install dependencies
         run: npm ci
       - run: npm run lint
+      - run: npm run pretty
+      - name: create .env file
+        run: |
+          echo "${{ secrets.DEPLOYMENT_SECRETS }}" > .env
       - name: Docker Compose Action
         uses: hoverkraft-tech/compose-action@v2.0.0
         with:
@@ -27,6 +33,6 @@ jobs:
           down-flags: "--volumes --rmi all"
       - run: npm run test
         env:
-          CI: true
+          CI: true,
       - name: build the app
         run: tsc

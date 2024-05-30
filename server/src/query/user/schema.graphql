@@ -1,0 +1,62 @@
+scalar NonEmptyString
+scalar Date
+
+type SelectedUserData {
+    role : String!
+    login_method : String!
+    free_tokens : Int!
+    full_name : String!
+    subscription_type : String!
+}
+
+input GetTestOptions{
+    paperCategory : NonEmptyString!
+    academyName : NonEmptyString!
+    paperYear : Int
+    paperSubject : String
+    giveRandomTest : Boolean
+    limit  : Int
+}
+type TestDataSent{
+    id : Int!
+    statement : String!, 
+    option_a : String!, 
+    option_b : String!, 
+    option_c : String!, 
+    correct : String!, 
+    explanation : String!, 
+    difficulty : String!
+    paper_year : Int!,
+    subject : String!
+}
+type OverAllUserData {
+    total_solved : Int!
+    total_correct : Int! 
+    total_incorrect : Int!
+    date : Date  
+}
+type SubjectWiseUserData {
+    subject : String!
+    total_solved : Int!
+    total_correct : Int! 
+    total_incorrect : Int!
+    date : Date  
+  }
+type UserPersonalTestData {
+    general : [OverAllUserData!]!
+    subjectWise : [SubjectWiseUserData!]!
+  }
+type Query {
+  GetUserData: SelectedUserData!
+  GetTestBasedOnOptions(input: GetTestOptions!): [TestDataSent!]!
+  GetUserPersonalTestData: UserPersonalTestData!
+}
+input UserTestDataInput {
+    totalSolved : Int!
+    totalCorrect : Int!
+    totalWrong : Int!
+    subject : NonEmptyString!
+  }
+type Mutation{
+  SaveUserTestData(input : UserTestDataInput!) : Boolean!
+}

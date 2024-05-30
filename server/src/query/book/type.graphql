@@ -1,6 +1,0 @@
-type Book {
-  name: String
-}
-type Query {
-  Book: Book
-}

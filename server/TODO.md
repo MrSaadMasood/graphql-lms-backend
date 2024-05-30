@@ -1,42 +1,43 @@
 # Todo For Backend
 
-[x] - start a simple server using graphql and wit the postgres attached
+[ x ] - start a simple server using graphql and wit the postgres attached
 
 [ x ] - write endpoint for a simple insert operation
 
-[ ] - write tests for the 2 endpoints
+[ x ] - write tests for the 2 endpoints
 
-[ ] - Sign up route for users with free 300 tokens
+[ x ] - Sign up route for users with free 300 tokens
 
-[ ] - login with google / clerk ( seperate access and refresh tokens for the admins and normal users)
+[ x ] - login with google / clerk ( seperate access and refresh tokens for the admins and normal users)
 
-[ ] - Reduce token number on solving free tests
+[ x ] - Reduce token number on solving free tests
 
-[ ] - buy token router using half the price of the subsription
+[ x ] - buy token router using half the price of the subsription
 
-[ ] - get tests route based on the option selected ( subject-wise, random, year-wise)
+[ x ] - get tests route based on the option selected ( subject-wise, random, year-wise)
 
-[ ] - get wrong mcqs explaination from the ids array
+[ x ] - data population using the csv file upload
 
-[ ] - data population using the csv file upload
+[ x ] - update the test database row
 
-[ ] - search the tests database using the statement text
+[ x ] - get a single mcq data admin
 
-[ ] - update the test database row
+[ x ]- get mcqs based on the academy name admin
 
-[ ] - delete a test database row
+[ x ] - delete a test database row
 
-[ ] - user personal data like total mcqs solved, total correct mcqs, total wrong mcqs, mcqs solved subject-wise.
+[ x ] - user personal data like total mcqs solved, total correct mcqs,
+total wrong mcqs, mcqs solved subject-wise.
+
+[ x ] - store user personal test data
 
 [ ] - admin dashboard data like total users who bought subsription, total free token users, total users who bought tokens
 
-[ ] - oAuthLogin for the Admins
-
 [ ] - publish total mcqs solved by all the users for realtieme data to show on the frontend
 
-[ ] - implement advanced search for adming dashboard where the admin can filter the mcqs based on the
+[ x ] - implement advanced search for adming dashboard where the admin can filter the mcqs based on the
 year, subject and text
 
-[ ] - implement pagination for the searched mcqs
+[ x ] - implement pagination for the searched mcqs
 
 [ ] - implement realtime collaboration for the users to take tests together with synchronization

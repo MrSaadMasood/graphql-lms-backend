@@ -1,18 +1,22 @@
 import { ApolloServer } from '@apollo/server';
-import express from 'express';
 import { expressMiddleware } from '@apollo/server/express4';
+import express from 'express';
 import { createApplication } from 'graphql-modules';
-import { bookmodule } from './query/book/book.module';
+import adminModule from "./query/admin/admin.module";
+import authModule from './query/auth/auth.module';
+import tokensModule from "./query/tokenManager/tokenManager.module";
+import userModule from "./query/user/user.module";
+import uploadCSVRouter from './routes/uploadCSVRouter';
 
 const app = express();
+app.use(express.json());
 
 const application = createApplication({
-  modules: [bookmodule],
+  modules: [authModule, tokensModule, userModule, adminModule],
 });
-console.log('added for workflows');
+
 const executor = application.createApolloExecutor();
 const schema = application.schema;
-
 const apolloServer = new ApolloServer({
   gateway: {
     async load() {
@@ -20,16 +24,22 @@ const apolloServer = new ApolloServer({
     },
     onSchemaLoadOrUpdate(callback) {
       callback({ apiSchema: schema, coreSupergraphSdl: '' });
-      return () => {};
+      return () => { };
     },
-    async stop() {},
+    async stop() { },
   },
 });
 
 async function server() {
   try {
+    if (process.env.NODE_ENV === 'test') return;
     await apolloServer.start();
-    app.use('/', express.json(), expressMiddleware(apolloServer));
+    app.use(
+      '/upload',
+      express.urlencoded({ extended: false }),
+      uploadCSVRouter
+    );
+    app.use('/', expressMiddleware(apolloServer));
     app.listen(3000, () => console.log(`the server is started at port `));
   } catch (error) {
     console.log('some error occured while running the apollo server', error);
@@ -38,5 +48,6 @@ async function server() {
 }
 
 server();
+
 export default apolloServer;
 export { app };
