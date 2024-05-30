@@ -4,9 +4,9 @@ import { apiPost } from "../testUtils/testUtils"
 describe("tests the get test mcqs based on the filter options provided", () => {
   const filter: TestSearchFilters = {
     paperYear: null,
-    searchText: "whi",
+    searchText: "who",
     paperSubject: null,
-    academyName: "British Council"
+    academyName: "Punjab Public Service Commission"
   }
   const searchedMCQSQueries = {
     query: `query($input: TestSearchFilters!){
@@ -22,9 +22,9 @@ describe("tests the get test mcqs based on the filter options provided", () => {
 
   it("should return the filtered mcqs based on the searchText only", async () => {
     const response = await apiPost(searchedMCQSQueries)
-    expect(response.body.data.SearchMCQBasedOnFilters).toHaveLength(2)
+    expect(response.body.data.SearchMCQBasedOnFilters).toHaveLength(3)
     expect(response.body.data.SearchMCQBasedOnFilters[0]).toEqual(expect.objectContaining({
-      id: expect.any(String),
+      id: expect.any(Number),
       statement: expect.any(String)
     }))
   })
@@ -37,8 +37,8 @@ describe("tests the get test mcqs based on the filter options provided", () => {
 
   it("should return the filtered mcqs based on the searched text, paper year, subject", async () => {
     searchedMCQSQueries.variables.input.paperYear = 2021
-    searchedMCQSQueries.variables.input.paperSubject = "English"
+    searchedMCQSQueries.variables.input.paperSubject = "Current Affairs"
     const response = await apiPost(searchedMCQSQueries)
-    expect(response.body.data.SearchMCQBasedOnFilters).toHaveLength(1)
+    expect(response.body.data.SearchMCQBasedOnFilters).toHaveLength(2)
   })
 })

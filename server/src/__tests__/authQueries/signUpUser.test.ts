@@ -15,7 +15,7 @@ describe('tests the user auth queries and mutations', () => {
   };
   it('should sign up the new user', async () => {
     const response = await apiPost(signUpQuery);
-    console.log('the sign up response is', response.body.errors);
+     
     expect(response.body.data).toEqual({ SignUpUser: { isSuccess: true } });
   });
 

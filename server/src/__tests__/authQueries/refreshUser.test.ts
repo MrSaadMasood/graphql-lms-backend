@@ -45,8 +45,8 @@ describe('should test the refresh accesstoken functinality', () => {
     refreshUserQuery.variables.input = loggedInUser;
     refreshUserQuery.variables.input.login_method = 'google';
     const respone = await apiPost(refreshUserQuery);
-    console.log('the refresh user', respone.body.data);
-    console.log('the refresh user', respone.body.errors);
+     
+     
     expect(respone.body.data.RefreshUser).toEqual({
       accessToken: 'googleRefreshedToken',
     });
