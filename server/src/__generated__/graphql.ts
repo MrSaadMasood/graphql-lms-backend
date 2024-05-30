@@ -174,6 +174,7 @@ export type SelectedUserData = {
 export type SubjectWiseUserData = {
   __typename?: 'SubjectWiseUserData';
   date?: Maybe<Scalars['Date']['output']>;
+  subject: Scalars['String']['output'];
   total_correct: Scalars['Int']['output'];
   total_incorrect: Scalars['Int']['output'];
   total_solved: Scalars['Int']['output'];
@@ -453,6 +454,7 @@ export type SelectedUserDataResolvers<ContextType = any, ParentType extends Reso
 
 export type SubjectWiseUserDataResolvers<ContextType = any, ParentType extends ResolversParentTypes['SubjectWiseUserData'] = ResolversParentTypes['SubjectWiseUserData']> = {
   date?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
+  subject?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   total_correct?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   total_incorrect?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   total_solved?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;

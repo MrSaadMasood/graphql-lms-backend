@@ -1,5 +1,5 @@
 /* eslint-disable */
-import * as Types from "__generated__/graphql";
+import * as Types from "./graphql";
 import * as gm from "graphql-modules";
 export namespace QueryModule {
   interface DefinedFields {
@@ -14,10 +14,10 @@ export namespace QueryModule {
     SelectedUserData: 'role' | 'login_method' | 'free_tokens' | 'full_name' | 'subscription_type';
     TestDataSent: 'id' | 'statement' | 'option_a' | 'option_b' | 'option_c' | 'correct' | 'explanation' | 'difficulty' | 'paper_year' | 'subject';
     OverAllUserData: 'total_solved' | 'total_correct' | 'total_incorrect' | 'date';
-    SubjectWiseUserData: 'total_solved' | 'total_correct' | 'total_incorrect' | 'date';
+    SubjectWiseUserData: 'subject' | 'total_solved' | 'total_correct' | 'total_incorrect' | 'date';
     UserPersonalTestData: 'general' | 'subjectWise';
   };
-  
+
   interface DefinedInputFields {
     TestSearchFilters: 'paperYear' | 'searchText' | 'paperSubject' | 'academyName';
     UpdateMCQInput: 'id' | 'statement' | 'option_a' | 'option_b' | 'option_c' | 'correct' | 'explanation' | 'subject' | 'paper_year' | 'paper_category' | 'difficulty';
@@ -27,7 +27,7 @@ export namespace QueryModule {
     GetTestOptions: 'paperCategory' | 'academyName' | 'paperYear' | 'paperSubject' | 'giveRandomTest' | 'limit';
     UserTestDataInput: 'totalSolved' | 'totalCorrect' | 'totalWrong' | 'subject';
   };
-  
+
   export type TestSearchFilters = Pick<Types.TestSearchFilters, DefinedInputFields['TestSearchFilters']>;
   export type UpdateMCQOutput = Pick<Types.UpdateMcqOutput, DefinedFields['UpdateMCQOutput']>;
   export type UpdateMCQInput = Pick<Types.UpdateMcqInput, DefinedInputFields['UpdateMCQInput']>;
@@ -48,12 +48,12 @@ export namespace QueryModule {
   export type SubjectWiseUserData = Pick<Types.SubjectWiseUserData, DefinedFields['SubjectWiseUserData']>;
   export type UserPersonalTestData = Pick<Types.UserPersonalTestData, DefinedFields['UserPersonalTestData']>;
   export type UserTestDataInput = Pick<Types.UserTestDataInput, DefinedInputFields['UserTestDataInput']>;
-  
+
   export type Scalars = Pick<Types.Scalars, 'NonEmptyString' | 'Email' | 'Date'>;
   export type NonEmptyStringScalarConfig = Types.NonEmptyStringScalarConfig;
   export type EmailScalarConfig = Types.EmailScalarConfig;
   export type DateScalarConfig = Types.DateScalarConfig;
-  
+
   export type UpdateMCQOutputResolvers = Pick<Types.UpdateMcqOutputResolvers, DefinedFields['UpdateMCQOutput'] | '__isTypeOf'>;
   export type MCQSearchResultResolvers = Pick<Types.McqSearchResultResolvers, DefinedFields['MCQSearchResult'] | '__isTypeOf'>;
   export type QueryResolvers = Pick<Types.QueryResolvers, DefinedFields['Query']>;
@@ -67,7 +67,7 @@ export namespace QueryModule {
   export type OverAllUserDataResolvers = Pick<Types.OverAllUserDataResolvers, DefinedFields['OverAllUserData'] | '__isTypeOf'>;
   export type SubjectWiseUserDataResolvers = Pick<Types.SubjectWiseUserDataResolvers, DefinedFields['SubjectWiseUserData'] | '__isTypeOf'>;
   export type UserPersonalTestDataResolvers = Pick<Types.UserPersonalTestDataResolvers, DefinedFields['UserPersonalTestData'] | '__isTypeOf'>;
-  
+
   export interface Resolvers {
     UpdateMCQOutput?: UpdateMCQOutputResolvers;
     MCQSearchResult?: MCQSearchResultResolvers;
@@ -86,7 +86,7 @@ export namespace QueryModule {
     Email?: Types.Resolvers['Email'];
     Date?: Types.Resolvers['Date'];
   };
-  
+
   export interface MiddlewareMap {
     '*'?: {
       '*'?: gm.Middleware[];
@@ -181,6 +181,7 @@ export namespace QueryModule {
     };
     SubjectWiseUserData?: {
       '*'?: gm.Middleware[];
+      subject?: gm.Middleware[];
       total_solved?: gm.Middleware[];
       total_correct?: gm.Middleware[];
       total_incorrect?: gm.Middleware[];
