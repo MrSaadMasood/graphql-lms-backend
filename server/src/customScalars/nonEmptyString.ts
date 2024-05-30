@@ -1,4 +1,5 @@
 import { GraphQLScalarType, Kind } from "graphql"
+import { stringValidator } from "../utils/helperFunctions"
 
 export const NonEmptyString = new GraphQLScalarType({
   name: "NonEmptyString",
@@ -15,9 +16,5 @@ export const NonEmptyString = new GraphQLScalarType({
   }
 })
 
-function stringValidator(value: unknown) {
-  if (typeof value === "string" && value.length > 0) return value
-  throw new TypeError("Empty string is recieved")
-}
 
 
