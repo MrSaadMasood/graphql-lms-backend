@@ -5,7 +5,7 @@ import { createReadStream } from 'fs';
 import { parse } from 'csv-parse';
 import { addTestDataQuery } from '../sqlQueries/reusedSQLQueries';
 
-type TestData = {
+type CSVRowStructure = {
   id: string;
   subject: string;
   statement: string;
@@ -24,10 +24,11 @@ export async function csvUploadController(req: Request, res: Response) {
     const file = req.file as Express.Multer.File;
     if (!file) throw new Error();
     const readStream = createReadStream(file.path);
-    const records: TestData[] = [];
+     
+    const records: CSVRowStructure[] = [];
     readStream
       .pipe(parse({ delimiter: ',', trim: true, columns: true }))
-      .on('data', (data: TestData) => {
+      .on('data', (data: CSVRowStructure) => {
         records.push(data);
       })
       .on('end', async () => {
@@ -68,6 +69,8 @@ export async function csvUploadController(req: Request, res: Response) {
         }, 0);
         await fs.unlink(file.path);
         return res.json(insertedRowCount);
+      }).on('error', () => {
+        return res.json("some error occured while inserting the rows")
       });
   } catch (error) {
     res.json("failed to load the data the File");
