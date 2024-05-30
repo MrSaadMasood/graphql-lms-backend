@@ -1,14 +1,16 @@
 import { ApolloServer } from '@apollo/server';
-import uploadCSVRouter from './routes/uploadCSVRouter';
-import express from 'express';
 import { expressMiddleware } from '@apollo/server/express4';
+import express from 'express';
 import { createApplication } from 'graphql-modules';
+import adminModule from "./query/admin/admin.module";
 import authModule from './query/auth/auth.module';
-import tokensModule from "./query/tokenManager/tokenManager.module"
-import userModule from "./query/user/user.module"
-import adminModule from "./query/admin/admin.module"
+import tokensModule from "./query/tokenManager/tokenManager.module";
+import userModule from "./query/user/user.module";
+import uploadCSVRouter from './routes/uploadCSVRouter';
+
 const app = express();
 app.use(express.json());
+
 const application = createApplication({
   modules: [authModule, tokensModule, userModule, adminModule],
 });
@@ -35,7 +37,7 @@ async function server() {
     app.use(
       '/upload',
       express.urlencoded({ extended: false }),
-      uploadCSVRouter,
+      uploadCSVRouter
     );
     app.use('/', expressMiddleware(apolloServer));
     app.listen(3000, () => console.log(`the server is started at port `));
