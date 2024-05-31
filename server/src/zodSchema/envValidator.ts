@@ -10,6 +10,8 @@ const envSchema = z.object({
   REFRESH_SECRET_ADMIN: zodString,
   GOOGLE_CLIENT_ID: zodString,
   GOOGLE_CLIENT_SECRET: zodString,
+  STRIPE_SECRET_KEY: zodString,
+  STRIPE_PUBLISHED_KEY: zodString
 });
 
 const env = envSchema.parse(process.env);

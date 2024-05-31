@@ -42,22 +42,22 @@ export async function LoginUser(
     [email],
   );
   const { password: hashedPassword, role, id, login_method } = user.rows[0];
-   
+
   if (login_method !== 'normal') throw new AuthorizationError();
   const passwordMatch = await bcrypt.compare(password, hashedPassword);
   if (!passwordMatch) throw new InputValidationError();
-   
+
   const { accessToken, refreshToken } = generateAccessRefreshToken({
     id,
     role,
   });
-   
+
   const storeRefreshToken = await pg.query(storeRefreshTokenQuery, [
     id,
     refreshToken,
   ]);
   if (!storeRefreshToken.rowCount) throw new DbError();
-   
+
   return {
     accessToken,
     login_method,
@@ -80,7 +80,7 @@ export async function SignUpUser(
     email,
     hashedPassword,
     'user',
-    "none",
+    'none',
     300,
     login_method,
   ]);

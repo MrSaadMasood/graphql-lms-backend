@@ -17,14 +17,14 @@ type CSVRowStructure = {
   paper_year: string;
   difficulty: string;
   paper_category: string;
-  academy_name: string
+  academy_name: string;
 };
 export async function csvUploadController(req: Request, res: Response) {
   try {
     const file = req.file as Express.Multer.File;
     if (!file) throw new Error();
     const readStream = createReadStream(file.path);
-     
+
     const records: CSVRowStructure[] = [];
     readStream
       .pipe(parse({ delimiter: ',', trim: true, columns: true }))
@@ -69,10 +69,11 @@ export async function csvUploadController(req: Request, res: Response) {
         }, 0);
         await fs.unlink(file.path);
         return res.json(insertedRowCount);
-      }).on('error', () => {
-        return res.json("some error occured while inserting the rows")
+      })
+      .on('error', () => {
+        return res.json('some error occured while inserting the rows');
       });
   } catch (error) {
-    res.json("failed to load the data the File");
+    res.json('failed to load the data the File');
   }
 }
