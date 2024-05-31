@@ -60,6 +60,7 @@ export type Mutation = {
   DeleteTestMCQ: Scalars['Boolean']['output'];
   GoogleLogin: Tokens;
   LoginUser: Tokens;
+  PurchaseOneTimeSubscription: Scalars['String']['output'];
   RefreshUser: AccessToken;
   SaveUserTestData: Scalars['Boolean']['output'];
   SignUpUser: Success;
@@ -410,6 +411,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   DeleteTestMCQ?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationDeleteTestMcqArgs, 'id'>>;
   GoogleLogin?: Resolver<ResolversTypes['Tokens'], ParentType, ContextType, RequireFields<MutationGoogleLoginArgs, 'code'>>;
   LoginUser?: Resolver<ResolversTypes['Tokens'], ParentType, ContextType, RequireFields<MutationLoginUserArgs, 'input'>>;
+  PurchaseOneTimeSubscription?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   RefreshUser?: Resolver<ResolversTypes['AccessToken'], ParentType, ContextType, RequireFields<MutationRefreshUserArgs, 'input'>>;
   SaveUserTestData?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationSaveUserTestDataArgs, 'input'>>;
   SignUpUser?: Resolver<ResolversTypes['Success'], ParentType, ContextType, RequireFields<MutationSignUpUserArgs, 'input'>>;
