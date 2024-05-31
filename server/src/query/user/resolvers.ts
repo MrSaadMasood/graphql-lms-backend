@@ -1,6 +1,12 @@
-import { Date } from "../../customScalars/DateScalar"
-import { NonEmptyString } from "../../customScalars/nonEmptyString"
-import { GetTestBasedOnOptions, GetUserData, GetUserPersonalTestData, SaveUserTestData } from "./resolverHelpers"
+import { Date } from '../../customScalars/DateScalar';
+import { NonEmptyString } from '../../customScalars/nonEmptyString';
+import {
+  GetTestBasedOnOptions,
+  GetUserData,
+  GetUserPersonalTestData,
+  PurchaseOneTimeSubscription,
+  SaveUserTestData,
+} from './resolverHelpers';
 
 const resolvers = {
   NonEmptyString,
@@ -8,11 +14,12 @@ const resolvers = {
   Query: {
     GetUserData,
     GetTestBasedOnOptions,
-    GetUserPersonalTestData
+    GetUserPersonalTestData,
   },
   Mutation: {
-    SaveUserTestData
-  }
-}
+    SaveUserTestData,
+    PurchaseOneTimeSubscription
+  },
+};
 
-export default resolvers
+export default resolvers;
