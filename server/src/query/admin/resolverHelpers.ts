@@ -2,16 +2,16 @@ import {
   McqSearchResult,
   TestSearchFilters,
   UpdateMcqInput,
-} from '../../__generated__/graphql';
-import { DbError, InputValidationError } from '../../customErrors/errors';
-import pgPool from '../../postgresClient/pgClient';
+} from '../../__generated__/graphql.js';
+import { DbError, InputValidationError } from '../../customErrors/errors.js';
+import pgPool from '../../postgresClient/pgClient.js';
 import {
   deleteTestMCQQuery,
   getAllMCQBasedOnAcademyQuery,
   getSpecificMCQQuery,
   searchMCQBasedOnFiltersQuery,
   updateTestMCQQuery,
-} from '../../sqlQueries/reusedSQLQueries';
+} from '../../sqlQueries/reusedSQLQueries.js';
 
 export async function SearchMCQBasedOnFilters(
   _parent: unknown,

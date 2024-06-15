@@ -1,4 +1,4 @@
-import { BuyMoreTokens, ConsumeToken } from './resolverHelpers';
+import { BuyMoreTokens, ConsumeToken } from './resolverHelpers.js';
 
 const resolvers = {
   Mutation: {

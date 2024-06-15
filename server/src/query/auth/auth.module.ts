@@ -1,8 +1,8 @@
 import { loadFilesSync } from '@graphql-tools/load-files';
 import { createModule } from 'graphql-modules';
-import { __dirname } from '../../utils/dirname';
+import { __dirname } from '../../utils/dirname.js';
 import { join } from 'path';
-import authResolvers from './resolvers';
+import authResolvers from './resolvers.js';
 
 const authModule = createModule({
   id: 'auth-module',

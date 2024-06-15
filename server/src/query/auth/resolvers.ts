@@ -1,10 +1,10 @@
-import { NonEmptyString } from '../../customScalars/nonEmptyString';
+import { NonEmptyString } from '../../customScalars/nonEmptyString.js';
 import {
   GoogleLogin,
   LoginUser,
   RefreshUser,
   SignUpUser,
-} from './resolverHelpers';
+} from './resolverHelpers.js';
 
 const resolvers = {
   NonEmptyString,

@@ -1,2 +1,2 @@
-type UserRole = 'user' | 'admin';
-type UserLoginMethod = 'normal' | 'google';
+export type UserRole = 'user' | 'admin';
+export type UserLoginMethod = 'normal' | 'google';

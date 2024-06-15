@@ -2,9 +2,9 @@ import {
   GetTestOptions,
   TestDataSent,
   UserTestDataInput,
-} from '../../__generated__/graphql';
-import { DbError, InputValidationError } from '../../customErrors/errors';
-import pgPool from '../../postgresClient/pgClient';
+} from '../../__generated__/graphql.js';
+import { DbError, InputValidationError } from '../../customErrors/errors.js';
+import pgPool from '../../postgresClient/pgClient.js';
 import {
   getUserDataQuery,
   getUserGeneralTestDataQuery,
@@ -13,8 +13,8 @@ import {
   testBasedOnPaperYearQuery,
   testBasedOnRandomOption,
   testBasedOnSubjectQuery,
-} from '../../sqlQueries/reusedSQLQueries';
-import { stripe } from '../../stripe/stripe';
+} from '../../sqlQueries/reusedSQLQueries.js';
+import { stripe } from '../../stripe/stripe.js';
 
 export async function GetUserData() {
   const userData = await pgPool.query(getUserDataQuery, ['hamza@gmail.com']);

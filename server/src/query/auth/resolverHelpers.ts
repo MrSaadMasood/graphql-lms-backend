@@ -1,28 +1,29 @@
-import { generateAccessRefreshToken } from './authUtils';
+import { generateAccessRefreshToken } from './authUtils.js';
 import jwt from 'jsonwebtoken';
 import { v4 as uuid } from 'uuid';
 import {
   AuthorizationError,
   DbError,
   InputValidationError,
-} from '../../customErrors/errors';
+} from '../../customErrors/errors.js';
 import bcrypt from 'bcryptjs';
-import pg from '../../postgresClient/pgClient';
+import pg from '../../postgresClient/pgClient.js';
 import {
   CreateUserInput,
   LoginUserInput,
   RefreshUserInput,
-} from '../../__generated__/graphql';
-import oAuth2Client from '../../utils/oAuth2Client';
-import env from '../../zodSchema/envValidator';
+} from '../../__generated__/graphql.js';
+import oAuth2Client from '../../utils/oAuth2Client.js';
+import env from '../../zodSchema/envValidator.js';
 import {
   signUpUserQuery,
   storeRefreshTokenQuery,
-} from '../../sqlQueries/reusedSQLQueries';
-import { createGoogleUserTransaction } from '../../sqlQueries/transactions';
+} from '../../sqlQueries/reusedSQLQueries.js';
+import { createGoogleUserTransaction } from '../../sqlQueries/transactions.js';
 import { GraphQLError } from 'graphql';
-import { refreshGoogleAccessToken } from '../../utils/refreshGoogleAccessToken';
+import { refreshGoogleAccessToken } from '../../utils/refreshGoogleAccessToken.js';
 import dotenv from 'dotenv';
+import type { UserRole, UserLoginMethod } from "../../__generated__/types.d.ts"
 dotenv.config();
 type UserInfoToCreateToken = {
   password: string;
@@ -37,6 +38,8 @@ export async function LoginUser(
   _parent: unknown,
   { input: { email, password } }: { input: LoginUserInput },
 ) {
+  console.log("the production build is giving some shitty error");
+
   const user = await pg.query<UserInfoToCreateToken>(
     `select * from users where email = $1`,
     [email],

@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
-import env from '../../zodSchema/envValidator';
+import env from '../../zodSchema/envValidator.js';
 import { GraphQLError } from 'graphql';
+import type { UserRole } from '../../__generated__/types.js';
 
 type UserPayloadForTokens = {
   id: string;

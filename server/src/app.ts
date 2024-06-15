@@ -6,11 +6,11 @@ import { expressMiddleware } from '@apollo/server/express4';
 import express from 'express';
 import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHttpServer"
 import { createApplication } from 'graphql-modules';
-import adminModule from './query/admin/admin.module';
-import authModule from './query/auth/auth.module';
-import tokensModule from './query/tokenManager/tokenManager.module';
-import userModule from './query/user/user.module';
-import uploadCSVRouter from './routes/uploadCSVRouter';
+import adminModule from './query/admin/admin.module.js';
+import authModule from './query/auth/auth.module.js';
+import tokensModule from './query/tokenManager/tokenManager.module.js';
+import userModule from './query/user/user.module.js';
+import uploadCSVRouter from './routes/uploadCSVRouter.js';
 
 const app = express();
 app.use(express.json());

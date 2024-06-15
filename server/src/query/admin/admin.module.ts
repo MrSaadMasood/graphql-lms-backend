@@ -1,7 +1,7 @@
 import { createModule } from 'graphql-modules';
-import { __dirname } from '../../utils/dirname';
+import { __dirname } from '../../utils/dirname.js';
 import { join } from 'path';
-import adminResolvers from './resolvers';
+import adminResolvers from './resolvers.js';
 import { loadFilesSync } from '@graphql-tools/load-files';
 
 const userModule = createModule({

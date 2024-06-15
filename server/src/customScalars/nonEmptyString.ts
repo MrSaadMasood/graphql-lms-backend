@@ -1,5 +1,5 @@
 import { GraphQLScalarType, Kind } from 'graphql';
-import { stringValidator } from '../utils/helperFunctions';
+import { stringValidator } from '../utils/helperFunctions.js';
 
 export const NonEmptyString = new GraphQLScalarType({
   name: 'NonEmptyString',

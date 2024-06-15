@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
-import pgPool from '../postgresClient/pgClient';
+import pgPool from '../postgresClient/pgClient.js';
 import fs from 'fs/promises';
 import { createReadStream } from 'fs';
 import { parse } from 'csv-parse';
-import { addTestDataQuery } from '../sqlQueries/reusedSQLQueries';
+import { addTestDataQuery } from '../sqlQueries/reusedSQLQueries.js';
 
 type CSVRowStructure = {
   id: string;

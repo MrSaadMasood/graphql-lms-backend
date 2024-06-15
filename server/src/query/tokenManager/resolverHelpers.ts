@@ -1,9 +1,9 @@
-import { DbError, InputValidationError } from '../../customErrors/errors';
-import pgPool from '../../postgresClient/pgClient';
+import { DbError, InputValidationError } from '../../customErrors/errors.js';
+import pgPool from '../../postgresClient/pgClient.js';
 import {
   buyMoreTokensQuery,
   consumeTokensQuery,
-} from '../../sqlQueries/reusedSQLQueries';
+} from '../../sqlQueries/reusedSQLQueries.js';
 
 export async function ConsumeToken(
   _parent: unknown,
