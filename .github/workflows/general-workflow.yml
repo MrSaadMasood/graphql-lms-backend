@@ -29,7 +29,7 @@ jobs:
       - name: Docker Compose Action
         uses: hoverkraft-tech/compose-action@v2.0.0
         with:
-          compose-file: "./server/docker-compose.dev.yml"
+          compose-file: "./server/docker-compose.postgres.yml"
           down-flags: "--volumes --rmi all"
       - run: npm run test
         env:
