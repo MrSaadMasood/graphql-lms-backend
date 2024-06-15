@@ -68,12 +68,12 @@ export async function csvUploadController(req: Request, res: Response) {
           return acc + data.rowCount;
         }, 0);
         await fs.unlink(file.path);
-        return res on(insertedRowCount);
+        return res.json(insertedRowCount);
       })
       .on('error', () => {
-        return res on('some error occured while inserting the rows');
+        return res.json('some error occured while inserting the rows');
       });
   } catch (error) {
-    res on('failed to load the data the File');
+    res.json('failed to load the data the File');
   }
 }
