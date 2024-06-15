@@ -1,12 +1,12 @@
-import { Date } from '../../customScalars/DateScalar.js';
-import { NonEmptyString } from '../../customScalars/nonEmptyString.js';
+import { Date } from '../../customScalars/DateScalar';
+import { NonEmptyString } from '../../customScalars/nonEmptyString';
 import {
   GetTestBasedOnOptions,
   GetUserData,
   GetUserPersonalTestData,
   PurchaseOneTimeSubscription,
   SaveUserTestData,
-} from './resolverHelpers.js';
+} from './resolverHelpers';
 
 const resolvers = {
   NonEmptyString,

@@ -1,11 +1,11 @@
-import { NonEmptyString } from '../../customScalars/nonEmptyString.js';
+import { NonEmptyString } from '../../customScalars/nonEmptyString';
 import {
   DeleteTestMCQ,
   GetAllMCQBasedOnAcademy,
   GetSpecificMCQ,
   SearchMCQBasedOnFilters,
   UpdateTestMCQ,
-} from './resolverHelpers.js';
+} from './resolverHelpers';
 
 const resolvers = {
   NonEmptyString,

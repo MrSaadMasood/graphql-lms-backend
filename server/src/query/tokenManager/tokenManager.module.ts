@@ -1,8 +1,8 @@
 import { loadFilesSync } from '@graphql-tools/load-files';
 import { createModule } from 'graphql-modules';
-import { __dirname } from '../../utils/dirname.js';
+import { __dirname } from '../../utils/dirname';
 import { join } from 'path';
-import tokenResolvers from './resolvers.js';
+import tokenResolvers from './resolvers';
 
 const tokenModule = createModule({
   id: 'token-module',

@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-import { zodString } from './schema.js';
+import { zodString } from './schema';
 import { z } from 'zod';
 dotenv.config();
 

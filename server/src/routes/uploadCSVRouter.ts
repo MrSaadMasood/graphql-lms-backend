@@ -1,7 +1,7 @@
 import express from 'express';
 import multer from 'multer';
 
-import { csvUploadController } from './csvUploadController.js';
+import { csvUploadController } from './csvUploadController';
 const storage = multer.diskStorage({
   destination(_req: Express.Request, _file: Express.Multer.File, callback) {
     return callback(null, 'uploads/');

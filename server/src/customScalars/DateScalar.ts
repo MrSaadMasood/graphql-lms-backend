@@ -1,5 +1,5 @@
 import { GraphQLScalarType, Kind } from 'graphql';
-import { dateValidator } from '../utils/helperFunctions.js';
+import { dateValidator } from '../utils/helperFunctions';
 export const Date = new GraphQLScalarType({
   name: 'Date',
   description: 'Scalar for Date',

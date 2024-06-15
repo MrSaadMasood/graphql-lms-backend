@@ -1,6 +1,6 @@
-import { DbError } from '../customErrors/errors.js';
-import pg from '../postgresClient/pgClient.js';
-import { signUpUserQuery, storeRefreshTokenQuery } from './reusedSQLQueries.js';
+import { DbError } from '../customErrors/errors';
+import pg from '../postgresClient/pgClient';
+import { signUpUserQuery, storeRefreshTokenQuery } from './reusedSQLQueries';
 
 export const createGoogleUserTransaction = async <T extends string>(
   first_name: T,

@@ -1,5 +1,5 @@
 /* eslint-disable */
-import * as Types from "./graphql.js";
+import * as Types from "./graphql";
 import * as gm from "graphql-modules";
 export namespace QueryModule {
   interface DefinedFields {

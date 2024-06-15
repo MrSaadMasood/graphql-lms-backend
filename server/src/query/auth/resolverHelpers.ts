@@ -1,27 +1,27 @@
-import { generateAccessRefreshToken } from './authUtils.js';
+import { generateAccessRefreshToken } from './authUtils';
 import jwt from 'jsonwebtoken';
 import { v4 as uuid } from 'uuid';
 import {
   AuthorizationError,
   DbError,
   InputValidationError,
-} from '../../customErrors/errors.js';
+} from '../../customErrors/errors';
 import bcrypt from 'bcryptjs';
-import pg from '../../postgresClient/pgClient.js';
+import pg from '../../postgresClient/pgClient';
 import {
   CreateUserInput,
   LoginUserInput,
   RefreshUserInput,
-} from '../../__generated__/graphql.js';
-import oAuth2Client from '../../utils/oAuth2Client.js';
-import env from '../../zodSchema/envValidator.js';
+} from '../../__generated__/graphql';
+import oAuth2Client from '../../utils/oAuth2Client';
+import env from '../../zodSchema/envValidator';
 import {
   signUpUserQuery,
   storeRefreshTokenQuery,
-} from '../../sqlQueries/reusedSQLQueries.js';
-import { createGoogleUserTransaction } from '../../sqlQueries/transactions.js';
+} from '../../sqlQueries/reusedSQLQueries';
+import { createGoogleUserTransaction } from '../../sqlQueries/transactions';
 import { GraphQLError } from 'graphql';
-import { refreshGoogleAccessToken } from '../../utils/refreshGoogleAccessToken.js';
+import { refreshGoogleAccessToken } from '../../utils/refreshGoogleAccessToken';
 import dotenv from 'dotenv';
 import type { UserRole, UserLoginMethod } from "../../__generated__/types.d.ts"
 dotenv.config();
