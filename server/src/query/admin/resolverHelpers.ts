@@ -3,6 +3,7 @@ import {
   TestSearchFilters,
   UpdateMcqInput,
 } from '../../__generated__/graphql';
+import { UserContext } from '../../__generated__/types';
 import { DbError, InputValidationError } from '../../customErrors/errors';
 import pgPool from '../../postgresClient/pgClient';
 import {
@@ -12,13 +13,16 @@ import {
   searchMCQBasedOnFiltersQuery,
   updateTestMCQQuery,
 } from '../../sqlQueries/reusedSQLQueries';
+import { requestUserExistenceVerifier } from '../../utils/helperFunctions';
 
 export async function SearchMCQBasedOnFilters(
   _parent: unknown,
   {
     input: { academyName, paperYear, paperSubject, searchText },
   }: { input: TestSearchFilters },
+  context: { user: UserContext }
 ) {
+  requestUserExistenceVerifier(context.user, true)
   const searchedMCQs = await pgPool.query<McqSearchResult>(
     searchMCQBasedOnFiltersQuery,
     [searchText, academyName, paperYear, paperSubject],
@@ -29,7 +33,11 @@ export async function SearchMCQBasedOnFilters(
   return searchedMCQs.rows;
 }
 
-export async function GetSpecificMCQ(_parent: unknown, { id }: { id: number }) {
+export async function GetSpecificMCQ(
+  _parent: unknown, { id }: { id: number },
+  context: { user: UserContext }
+) {
+  requestUserExistenceVerifier(context.user, true)
   const specificMCQ = await pgPool.query<UpdateMcqInput>(getSpecificMCQQuery, [
     id,
   ]);
@@ -54,7 +62,9 @@ export async function UpdateTestMCQ(
       paper_category,
     },
   }: { input: UpdateMcqInput },
+  context: { user: UserContext }
 ) {
+  requestUserExistenceVerifier(context.user, true)
   if (
     !id ||
     !statement ||
@@ -86,7 +96,10 @@ export async function UpdateTestMCQ(
   return true;
 }
 
-export async function DeleteTestMCQ(_parent: unknown, { id }: { id: string }) {
+export async function DeleteTestMCQ(_parent: unknown, { id }: { id: string },
+  context: { user: UserContext }
+) {
+  requestUserExistenceVerifier(context.user, true)
   const deletedMCQ = await pgPool.query(deleteTestMCQQuery, [id]);
   if (!deletedMCQ.rowCount)
     throw new DbError('failed to delete the requested mcq');
@@ -96,7 +109,9 @@ export async function DeleteTestMCQ(_parent: unknown, { id }: { id: string }) {
 export async function GetAllMCQBasedOnAcademy(
   _parent: unknown,
   { academyName, offset }: { academyName: string; offset: number },
+  context: { user: UserContext }
 ) {
+  requestUserExistenceVerifier(context.user, true)
   const allMcqsOfAcademy = await pgPool.query(getAllMCQBasedOnAcademyQuery, [
     academyName,
     offset,

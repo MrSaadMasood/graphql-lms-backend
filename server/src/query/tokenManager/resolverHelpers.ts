@@ -1,17 +1,21 @@
+import { UserContext } from '../../__generated__/types';
 import { DbError, InputValidationError } from '../../customErrors/errors';
 import pgPool from '../../postgresClient/pgClient';
 import {
   buyMoreTokensQuery,
   consumeTokensQuery,
 } from '../../sqlQueries/reusedSQLQueries';
+import { requestUserExistenceVerifier } from '../../utils/helperFunctions';
 
 export async function ConsumeToken(
   _parent: unknown,
   { isTestCompleted }: { isTestCompleted: boolean },
+  context: { user: UserContext }
 ) {
+  const user = requestUserExistenceVerifier(context.user)
   if (!isTestCompleted) throw new InputValidationError();
   const reduceTokens = await pgPool.query(consumeTokensQuery, [
-    'hamza@gmail.com',
+    user.email,
   ]);
   if (!reduceTokens.rowCount) throw new DbError('failed to consume the tokens');
   return {
@@ -19,9 +23,14 @@ export async function ConsumeToken(
   };
 }
 
-export async function BuyMoreTokens() {
+export async function BuyMoreTokens(
+  _parent: unknown,
+  _args: unknown,
+  context: { user: UserContext }
+) {
+  const user = requestUserExistenceVerifier(context.user)
   const updateFreeTokens = await pgPool.query(buyMoreTokensQuery, [
-    'hamza@gmail.com',
+    user.email,
   ]);
 
   if (!updateFreeTokens.rowCount)

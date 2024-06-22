@@ -23,14 +23,8 @@ import { createGoogleUserTransaction } from '../../sqlQueries/transactions';
 import { GraphQLError } from 'graphql';
 import { refreshGoogleAccessToken } from '../../utils/refreshGoogleAccessToken';
 import dotenv from 'dotenv';
-import type { UserRole, UserLoginMethod } from "../../__generated__/types.d.ts"
+import type { UserRole, UserInfoToCreateToken } from "../../__generated__/types.d.ts"
 dotenv.config();
-type UserInfoToCreateToken = {
-  password: string;
-  id: string;
-  role: UserRole;
-  login_method: UserLoginMethod;
-};
 
 const { GOOGLE_CLIENT_ID, REFRESH_SECRET_USER, REFRESH_SECRET_ADMIN } = env;
 
@@ -38,8 +32,6 @@ export async function LoginUser(
   _parent: unknown,
   { input: { email, password } }: { input: LoginUserInput },
 ) {
-  console.log("the production build is giving some shitty error");
-
   const user = await pg.query<UserInfoToCreateToken>(
     `select * from users where email = $1`,
     [email],
@@ -76,8 +68,9 @@ export async function SignUpUser(
   }: { input: CreateUserInput },
 ) {
   const hashedPassword = await bcrypt.hash(password, 10);
+  const id = uuid()
   const signuUpUser = await pg.query(signUpUserQuery, [
-    uuid(),
+    id,
     first_name,
     last_name,
     email,

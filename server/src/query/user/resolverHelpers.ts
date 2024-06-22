@@ -3,6 +3,7 @@ import {
   TestDataSent,
   UserTestDataInput,
 } from '../../__generated__/graphql';
+import { UserContext } from '../../__generated__/types';
 import { DbError, InputValidationError } from '../../customErrors/errors';
 import pgPool from '../../postgresClient/pgClient';
 import {
@@ -15,9 +16,15 @@ import {
   testBasedOnSubjectQuery,
 } from '../../sqlQueries/reusedSQLQueries';
 import { stripe } from '../../stripe/stripe';
+import { requestUserExistenceVerifier } from '../../utils/helperFunctions';
 
-export async function GetUserData() {
-  const userData = await pgPool.query(getUserDataQuery, ['hamza@gmail.com']);
+export async function GetUserData(
+  _root: unknown,
+  _args: unknown,
+  context: { user: UserContext }
+) {
+  const user = requestUserExistenceVerifier(context.user)
+  const userData = await pgPool.query(getUserDataQuery, [user.email]);
   if (!userData.rowCount) throw new DbError('failed to get the user Data');
   return userData.rows[0];
 }
@@ -25,6 +32,7 @@ export async function GetUserData() {
 export async function GetTestBasedOnOptions(
   _parent: unknown,
   { input }: { input: GetTestOptions },
+  context: { user: UserContext }
 ) {
   const {
     paperCategory,
@@ -35,6 +43,7 @@ export async function GetTestBasedOnOptions(
     limit,
   } = input;
   if (paperYear) {
+    requestUserExistenceVerifier(context.user)
     const specificYearPaper = await pgPool.query<TestDataSent>(
       testBasedOnPaperYearQuery,
       [paperYear, paperCategory, academyName],
@@ -70,9 +79,11 @@ export async function SaveUserTestData(
   {
     input: { totalSolved, totalWrong, totalCorrect, subject },
   }: { input: UserTestDataInput },
+  context: { user: UserContext }
 ) {
+  const user = requestUserExistenceVerifier(context.user)
   const savedUserTestData = await pgPool.query(saveUserTestDataQuery, [
-    'f415284b-87b4-4206-a79f-5bd61b00de97',
+    user.id,
     subject,
     totalSolved,
     totalCorrect,
@@ -83,13 +94,18 @@ export async function SaveUserTestData(
   return true;
 }
 
-export async function GetUserPersonalTestData() {
+export async function GetUserPersonalTestData(
+  _parent: unknown,
+  _args: unknown,
+  context: { user: UserContext }
+) {
+  const user = requestUserExistenceVerifier(context.user)
   const userGeneralTestData = await pgPool.query(getUserGeneralTestDataQuery, [
-    'f415284b-87b4-4206-a79f-5bd61b00de97',
+    user.id,
   ]);
   const userSubjectWiseTestData = await pgPool.query(
     getUserSubjectWiseTestDataQuery,
-    ['f415284b-87b4-4206-a79f-5bd61b00de97'],
+    [user.id],
   );
   if (!userGeneralTestData.rowCount || !userSubjectWiseTestData.rowCount)
     throw new DbError('failed to get the personalized user data');
@@ -99,7 +115,12 @@ export async function GetUserPersonalTestData() {
   };
 }
 
-export async function PurchaseOneTimeSubscription() {
+export async function PurchaseOneTimeSubscription(
+  _parent: unknown,
+  _args: unknown,
+  context: { user: UserContext }
+) {
+  requestUserExistenceVerifier(context.user)
   const product = [{
     name: "Fish",
     quantity: 20,
@@ -132,6 +153,5 @@ export async function PurchaseOneTimeSubscription() {
     cancel_url: "http://localhost:3000/cancel",
 
   })
-  console.log(session)
   return session.id
 }
