@@ -8,3 +8,7 @@ export function stringValidator(value: unknown) {
   if (typeof value === 'string' && value.length > 0) return value;
   throw new TypeError('Empty string is recieved');
 }
+
+export function emailValidator(value: unknown) {
+  return z.string().email().parse(value)
+}

@@ -1,3 +1,4 @@
+import { Email } from '../../customScalars/EmailScalar';
 import { NonEmptyString } from '../../customScalars/nonEmptyString';
 import {
   GoogleLogin,
@@ -7,6 +8,7 @@ import {
 } from './resolverHelpers';
 
 const resolvers = {
+  Email,
   NonEmptyString,
   Mutation: {
     LoginUser,
