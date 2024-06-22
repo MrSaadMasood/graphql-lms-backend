@@ -21,7 +21,7 @@ describe('tests the get test mcqs based on the filter options provided', () => {
   };
 
   it('should return the filtered mcqs based on the searchText only', async () => {
-    const response = await apiPost(searchedMCQSQueries);
+    const response = await apiPost(searchedMCQSQueries, true);
     expect(response.body.data.SearchMCQBasedOnFilters).toHaveLength(3);
     expect(response.body.data.SearchMCQBasedOnFilters[0]).toEqual(
       expect.objectContaining({
@@ -33,14 +33,14 @@ describe('tests the get test mcqs based on the filter options provided', () => {
 
   it('should return the filtered mcqs based on the searched text, paper year', async () => {
     searchedMCQSQueries.variables.input.paperYear = 2021;
-    const response = await apiPost(searchedMCQSQueries);
+    const response = await apiPost(searchedMCQSQueries, true);
     expect(response.body.data.SearchMCQBasedOnFilters).toHaveLength(2);
   });
 
   it('should return the filtered mcqs based on the searched text, paper year, subject', async () => {
     searchedMCQSQueries.variables.input.paperYear = 2021;
     searchedMCQSQueries.variables.input.paperSubject = 'Current Affairs';
-    const response = await apiPost(searchedMCQSQueries);
+    const response = await apiPost(searchedMCQSQueries, true);
     expect(response.body.data.SearchMCQBasedOnFilters).toHaveLength(2);
   });
 });

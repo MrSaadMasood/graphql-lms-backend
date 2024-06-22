@@ -13,6 +13,7 @@ describe('test if the user data is returned', () => {
   };
   it('should return the user data requested', async () => {
     const response = await apiPost(getUserDataQuery);
+    console.log("the response is", response.body)
     expect(response.body.data.GetUserData).toEqual(
       expect.objectContaining({
         free_tokens: expect.any(Number),

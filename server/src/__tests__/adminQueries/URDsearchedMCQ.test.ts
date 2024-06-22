@@ -15,7 +15,7 @@ describe('test the get spcific mcq from the table functionlity', () => {
     },
   };
   it('should return the required mcq based on the correct id', async () => {
-    const response = await apiPost(getSpecificMcqQuery);
+    const response = await apiPost(getSpecificMcqQuery, true);
     expect(response.body.data.GetSpecificMCQ).toEqual(
       expect.objectContaining({
         id: expect.any(Number),
@@ -27,7 +27,7 @@ describe('test the get spcific mcq from the table functionlity', () => {
   });
   it('nagetive : should fail to get the mcq if the id is incorrect', async () => {
     getSpecificMcqQuery.variables.getSpecificMcqId = 10000000;
-    const response = await apiPost(getSpecificMcqQuery);
+    const response = await apiPost(getSpecificMcqQuery, true);
     expect(response.body.errors).toHaveLength(1);
     expect(response.body.data).toBeNull();
   });
@@ -56,13 +56,13 @@ describe('tests the update already present mcq correctly', () => {
     },
   };
   it('should update the mcq based on the params', async () => {
-    const response = await apiPost(updateMCQQuery);
+    const response = await apiPost(updateMCQQuery, true);
     expect(response.body.data.UpdateTestMCQ).toBe(true);
   });
 
   it('negative: should fail to update the mcq if the id is incorrect', async () => {
     updateMCQQuery.variables.input.id = 10000000;
-    const error = await apiPost(updateMCQQuery);
+    const error = await apiPost(updateMCQQuery, true);
     expect(error.body.data).toBeNull();
     expect(error.body.errors).toHaveLength(1);
   });
@@ -79,14 +79,14 @@ describe('test the deletion of a specific mcq from the database', () => {
   };
 
   it('should successfully delete the mcq from the database', async () => {
-    const response = await apiPost(deleteMCQQuery);
+    const response = await apiPost(deleteMCQQuery, true);
 
     expect(response.body.data.DeleteTestMCQ).toBe(true);
   });
 
   it('negative: should fail to delete the mcq if the id is incorrect', async () => {
     deleteMCQQuery.variables.deleteTestMcqId = 10000000;
-    const response = await apiPost(deleteMCQQuery);
+    const response = await apiPost(deleteMCQQuery, true);
 
     expect(response.body.data).toBeNull();
     expect(response.body.errors).toHaveLength(1);
@@ -108,7 +108,7 @@ describe('tests the get mcqs based on the academy name and offset using paginati
   };
 
   it('should return the paginate based mcqs', async () => {
-    const response = await apiPost(getPaginatedMCQQuery);
+    const response = await apiPost(getPaginatedMCQQuery, true);
     expect(response.body.data.GetAllMCQBasedOnAcademy).toHaveLength(4);
     expect(response.body.data.GetAllMCQBasedOnAcademy[0]).toEqual(
       expect.objectContaining({
@@ -120,7 +120,7 @@ describe('tests the get mcqs based on the academy name and offset using paginati
 
   it('negative: should fail to give the paginate mcqs if the academy name is incorrect', async () => {
     getPaginatedMCQQuery.variables.academyName = 'hola';
-    const error = await apiPost(getPaginatedMCQQuery);
+    const error = await apiPost(getPaginatedMCQQuery, true);
     expect(error.body.data).toBeNull();
     expect(error.body.errors).toHaveLength(1);
   });
