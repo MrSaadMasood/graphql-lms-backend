@@ -11,7 +11,12 @@ const envSchema = z.object({
   GOOGLE_CLIENT_ID: zodString,
   GOOGLE_CLIENT_SECRET: zodString,
   STRIPE_SECRET_KEY: zodString,
-  STRIPE_PUBLISHED_KEY: zodString
+  STRIPE_PUBLISHED_KEY: zodString,
+  POSTGRES_USER: zodString.optional(),
+  POSTGRES_PASSWORD: zodString.optional(),
+  POSTGRES_DATABASE: zodString.optional(),
+  POSTGRES_PORT: z.coerce.number().optional(),
+  PORT: z.coerce.number()
 });
 
 const env = envSchema.parse(process.env);
