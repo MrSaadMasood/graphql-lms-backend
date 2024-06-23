@@ -5,16 +5,23 @@ import {
   LoginUser,
   RefreshUser,
   SignUpUser,
+  UpgradeToAdmin
 } from './resolverHelpers';
 
 const resolvers = {
   Email,
   NonEmptyString,
+  Query: {
+    Ping() {
+      return "Pong"
+    }
+  },
   Mutation: {
     LoginUser,
     SignUpUser,
     GoogleLogin,
     RefreshUser,
+    UpgradeToAdmin
   },
 };
 
