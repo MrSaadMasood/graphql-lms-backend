@@ -12,6 +12,9 @@ import tokensModule from './query/tokenManager/tokenManager.module';
 import userModule from './query/user/user.module';
 import uploadCSVRouter from './routes/uploadCSVRouter';
 import { context } from './utils/helperFunctions';
+import env from "./zodSchema/envValidator"
+
+const { PORT } = env
 
 const app = express();
 app.use(express.json());
@@ -57,7 +60,7 @@ async function server() {
     app.use('/', expressMiddleware(apolloServer, {
       context: context
     }));
-    app.listen(3000, () => console.log(`the server is started at port `));
+    app.listen(PORT, () => console.log(`the serve is now running`));
   } catch (error) {
     console.log('some error occured while running the apollo server', error);
     await apolloServer.stop();
