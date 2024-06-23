@@ -40,7 +40,7 @@ type SubjectWiseUserData {
   total_solved: Int!
   total_correct: Int!
   total_incorrect: Int!
-  date: Date
+  date: Date!
 }
 type UserPersonalTestData {
   general: [OverAllUserData!]!
