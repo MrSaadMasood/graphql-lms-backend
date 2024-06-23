@@ -1,4 +1,4 @@
-import { generateAccessRefreshToken } from './authUtils';
+import { generateAccessRefreshToken } from '../../utils/authUtils';
 import jwt from 'jsonwebtoken';
 import { v4 as uuid } from 'uuid';
 import {
