@@ -13,10 +13,15 @@ import userModule from './query/user/user.module';
 import uploadCSVRouter from './routes/uploadCSVRouter';
 import { context } from './utils/helperFunctions';
 import env from "./zodSchema/envValidator"
-
+import compression from 'compression'
+import helmet from "helmet"
+import cors from "cors"
 const { PORT } = env
 
 const app = express();
+app.use(compression())
+app.use(helmet())
+app.use(cors())
 app.use(express.json());
 
 const httpServer = createServer(app)
