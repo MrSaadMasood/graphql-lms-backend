@@ -65,6 +65,7 @@ export type Mutation = {
   SaveUserTestData: Scalars['Boolean']['output'];
   SignUpUser: Success;
   UpdateTestMCQ: Scalars['Boolean']['output'];
+  UpgradeToAdmin: UpgradeStatus;
 };
 
 
@@ -107,6 +108,11 @@ export type MutationUpdateTestMcqArgs = {
   input: UpdateMcqInput;
 };
 
+
+export type MutationUpgradeToAdminArgs = {
+  email: Scalars['NonEmptyString']['input'];
+};
+
 export type OverAllUserData = {
   __typename?: 'OverAllUserData';
   date?: Maybe<Scalars['Date']['output']>;
@@ -122,8 +128,8 @@ export type Query = {
   GetTestBasedOnOptions: Array<TestDataSent>;
   GetUserData: SelectedUserData;
   GetUserPersonalTestData: UserPersonalTestData;
+  Ping: Scalars['String']['output'];
   SearchMCQBasedOnFilters: Array<McqSearchResult>;
-  dummy?: Maybe<Scalars['String']['output']>;
 };
 
 
@@ -145,11 +151,6 @@ export type QueryGetTestBasedOnOptionsArgs = {
 
 export type QuerySearchMcqBasedOnFiltersArgs = {
   input: TestSearchFilters;
-};
-
-
-export type QueryDummyArgs = {
-  id: Scalars['String']['input'];
 };
 
 export type RefreshUserInput = {
@@ -242,6 +243,11 @@ export type UpdateMcqOutput = {
   paper_year: Scalars['Int']['output'];
   statement: Scalars['String']['output'];
   subject: Scalars['String']['output'];
+};
+
+export type UpgradeStatus = {
+  __typename?: 'UpgradeStatus';
+  isMadeAdmin: Scalars['Boolean']['output'];
 };
 
 export type UserPersonalTestData = {
@@ -352,6 +358,7 @@ export type ResolversTypes = {
   Tokens: ResolverTypeWrapper<Tokens>;
   UpdateMCQInput: UpdateMcqInput;
   UpdateMCQOutput: ResolverTypeWrapper<UpdateMcqOutput>;
+  UpgradeStatus: ResolverTypeWrapper<UpgradeStatus>;
   UserPersonalTestData: ResolverTypeWrapper<UserPersonalTestData>;
   UserTestDataInput: UserTestDataInput;
 };
@@ -382,6 +389,7 @@ export type ResolversParentTypes = {
   Tokens: Tokens;
   UpdateMCQInput: UpdateMcqInput;
   UpdateMCQOutput: UpdateMcqOutput;
+  UpgradeStatus: UpgradeStatus;
   UserPersonalTestData: UserPersonalTestData;
   UserTestDataInput: UserTestDataInput;
 };
@@ -416,6 +424,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   SaveUserTestData?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationSaveUserTestDataArgs, 'input'>>;
   SignUpUser?: Resolver<ResolversTypes['Success'], ParentType, ContextType, RequireFields<MutationSignUpUserArgs, 'input'>>;
   UpdateTestMCQ?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType, RequireFields<MutationUpdateTestMcqArgs, 'input'>>;
+  UpgradeToAdmin?: Resolver<ResolversTypes['UpgradeStatus'], ParentType, ContextType, RequireFields<MutationUpgradeToAdminArgs, 'email'>>;
 };
 
 export interface NonEmptyStringScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['NonEmptyString'], any> {
@@ -436,8 +445,8 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   GetTestBasedOnOptions?: Resolver<Array<ResolversTypes['TestDataSent']>, ParentType, ContextType, RequireFields<QueryGetTestBasedOnOptionsArgs, 'input'>>;
   GetUserData?: Resolver<ResolversTypes['SelectedUserData'], ParentType, ContextType>;
   GetUserPersonalTestData?: Resolver<ResolversTypes['UserPersonalTestData'], ParentType, ContextType>;
+  Ping?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   SearchMCQBasedOnFilters?: Resolver<Array<ResolversTypes['MCQSearchResult']>, ParentType, ContextType, RequireFields<QuerySearchMcqBasedOnFiltersArgs, 'input'>>;
-  dummy?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, RequireFields<QueryDummyArgs, 'id'>>;
 };
 
 export type RemainingTokensResolvers<ContextType = any, ParentType extends ResolversParentTypes['RemainingTokens'] = ResolversParentTypes['RemainingTokens']> = {
@@ -505,6 +514,11 @@ export type UpdateMcqOutputResolvers<ContextType = any, ParentType extends Resol
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type UpgradeStatusResolvers<ContextType = any, ParentType extends ResolversParentTypes['UpgradeStatus'] = ResolversParentTypes['UpgradeStatus']> = {
+  isMadeAdmin?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type UserPersonalTestDataResolvers<ContextType = any, ParentType extends ResolversParentTypes['UserPersonalTestData'] = ResolversParentTypes['UserPersonalTestData']> = {
   general?: Resolver<Array<ResolversTypes['OverAllUserData']>, ParentType, ContextType>;
   subjectWise?: Resolver<Array<ResolversTypes['SubjectWiseUserData']>, ParentType, ContextType>;
@@ -527,6 +541,7 @@ export type Resolvers<ContextType = any> = {
   TestDataSent?: TestDataSentResolvers<ContextType>;
   Tokens?: TokensResolvers<ContextType>;
   UpdateMCQOutput?: UpdateMcqOutputResolvers<ContextType>;
+  UpgradeStatus?: UpgradeStatusResolvers<ContextType>;
   UserPersonalTestData?: UserPersonalTestDataResolvers<ContextType>;
 };
 

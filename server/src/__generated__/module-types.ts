@@ -5,10 +5,11 @@ export namespace QueryModule {
   interface DefinedFields {
     UpdateMCQOutput: 'id' | 'statement' | 'option_a' | 'option_b' | 'option_c' | 'correct' | 'explanation' | 'subject' | 'paper_year' | 'paper_category' | 'difficulty';
     MCQSearchResult: 'id' | 'statement';
-    Query: 'SearchMCQBasedOnFilters' | 'GetSpecificMCQ' | 'GetAllMCQBasedOnAcademy' | 'dummy' | 'GetUserData' | 'GetTestBasedOnOptions' | 'GetUserPersonalTestData';
-    Mutation: 'UpdateTestMCQ' | 'DeleteTestMCQ' | 'SignUpUser' | 'LoginUser' | 'RefreshUser' | 'GoogleLogin' | 'ConsumeToken' | 'BuyMoreTokens' | 'SaveUserTestData' | 'PurchaseOneTimeSubscription';
+    Query: 'SearchMCQBasedOnFilters' | 'GetSpecificMCQ' | 'GetAllMCQBasedOnAcademy' | 'Ping' | 'GetUserData' | 'GetTestBasedOnOptions' | 'GetUserPersonalTestData';
+    Mutation: 'UpdateTestMCQ' | 'DeleteTestMCQ' | 'SignUpUser' | 'LoginUser' | 'RefreshUser' | 'GoogleLogin' | 'UpgradeToAdmin' | 'ConsumeToken' | 'BuyMoreTokens' | 'SaveUserTestData' | 'PurchaseOneTimeSubscription';
     Success: 'isSuccess';
     AccessToken: 'accessToken';
+    UpgradeStatus: 'isMadeAdmin';
     Tokens: 'accessToken' | 'refreshToken' | 'login_method' | 'role';
     RemainingTokens: 'remainingTokens';
     SelectedUserData: 'role' | 'login_method' | 'free_tokens' | 'full_name' | 'subscription_type';
@@ -36,6 +37,7 @@ export namespace QueryModule {
   export type Mutation = Pick<Types.Mutation, DefinedFields['Mutation']>;
   export type Success = Pick<Types.Success, DefinedFields['Success']>;
   export type AccessToken = Pick<Types.AccessToken, DefinedFields['AccessToken']>;
+  export type UpgradeStatus = Pick<Types.UpgradeStatus, DefinedFields['UpgradeStatus']>;
   export type Tokens = Pick<Types.Tokens, DefinedFields['Tokens']>;
   export type LoginUserInput = Pick<Types.LoginUserInput, DefinedInputFields['LoginUserInput']>;
   export type CreateUserInput = Pick<Types.CreateUserInput, DefinedInputFields['CreateUserInput']>;
@@ -60,6 +62,7 @@ export namespace QueryModule {
   export type MutationResolvers = Pick<Types.MutationResolvers, DefinedFields['Mutation']>;
   export type SuccessResolvers = Pick<Types.SuccessResolvers, DefinedFields['Success'] | '__isTypeOf'>;
   export type AccessTokenResolvers = Pick<Types.AccessTokenResolvers, DefinedFields['AccessToken'] | '__isTypeOf'>;
+  export type UpgradeStatusResolvers = Pick<Types.UpgradeStatusResolvers, DefinedFields['UpgradeStatus'] | '__isTypeOf'>;
   export type TokensResolvers = Pick<Types.TokensResolvers, DefinedFields['Tokens'] | '__isTypeOf'>;
   export type RemainingTokensResolvers = Pick<Types.RemainingTokensResolvers, DefinedFields['RemainingTokens'] | '__isTypeOf'>;
   export type SelectedUserDataResolvers = Pick<Types.SelectedUserDataResolvers, DefinedFields['SelectedUserData'] | '__isTypeOf'>;
@@ -75,6 +78,7 @@ export namespace QueryModule {
     Mutation?: MutationResolvers;
     Success?: SuccessResolvers;
     AccessToken?: AccessTokenResolvers;
+    UpgradeStatus?: UpgradeStatusResolvers;
     Tokens?: TokensResolvers;
     RemainingTokens?: RemainingTokensResolvers;
     SelectedUserData?: SelectedUserDataResolvers;
@@ -115,7 +119,7 @@ export namespace QueryModule {
       SearchMCQBasedOnFilters?: gm.Middleware[];
       GetSpecificMCQ?: gm.Middleware[];
       GetAllMCQBasedOnAcademy?: gm.Middleware[];
-      dummy?: gm.Middleware[];
+      Ping?: gm.Middleware[];
       GetUserData?: gm.Middleware[];
       GetTestBasedOnOptions?: gm.Middleware[];
       GetUserPersonalTestData?: gm.Middleware[];
@@ -128,6 +132,7 @@ export namespace QueryModule {
       LoginUser?: gm.Middleware[];
       RefreshUser?: gm.Middleware[];
       GoogleLogin?: gm.Middleware[];
+      UpgradeToAdmin?: gm.Middleware[];
       ConsumeToken?: gm.Middleware[];
       BuyMoreTokens?: gm.Middleware[];
       SaveUserTestData?: gm.Middleware[];
@@ -140,6 +145,10 @@ export namespace QueryModule {
     AccessToken?: {
       '*'?: gm.Middleware[];
       accessToken?: gm.Middleware[];
+    };
+    UpgradeStatus?: {
+      '*'?: gm.Middleware[];
+      isMadeAdmin?: gm.Middleware[];
     };
     Tokens?: {
       '*'?: gm.Middleware[];

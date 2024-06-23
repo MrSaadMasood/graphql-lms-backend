@@ -220,3 +220,10 @@ export const buyMoreTokensQuery = `
   WHERE email = $1 
   RETURNING free_tokens;
 `;
+
+export const updateUserStatusToAdminQuery = `
+  UPDATE users
+  SET 
+    role = 'admin'
+  WHERE email = $1
+;`

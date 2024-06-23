@@ -18,12 +18,14 @@ import env from '../../zodSchema/envValidator';
 import {
   signUpUserQuery,
   storeRefreshTokenQuery,
+  updateUserStatusToAdminQuery,
 } from '../../sqlQueries/reusedSQLQueries';
 import { createGoogleUserTransaction } from '../../sqlQueries/transactions';
 import { GraphQLError } from 'graphql';
 import { refreshGoogleAccessToken } from '../../utils/refreshGoogleAccessToken';
 import dotenv from 'dotenv';
 import type { UserRole, UserInfoToCreateToken } from "../../__generated__/types.d.ts"
+import pgPool from '../../postgresClient/pgClient';
 dotenv.config();
 
 const { GOOGLE_CLIENT_ID, REFRESH_SECRET_USER, REFRESH_SECRET_ADMIN } = env;
@@ -159,4 +161,13 @@ export async function RefreshUser(
   return {
     accessToken,
   };
+}
+
+export async function UpgradeToAdmin(
+  _parent: unknown,
+  { email }: { email: string }
+) {
+  const updateUserStatus = await pgPool.query(updateUserStatusToAdminQuery, [email])
+  if (!updateUserStatus.rowCount) throw new DbError("failed to upgrade the status")
+  return { isMadeAdmin: true }
 }

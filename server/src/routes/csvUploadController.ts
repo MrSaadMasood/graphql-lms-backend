@@ -1,8 +1,9 @@
-import { Request, Response } from 'express';
-import pgPool from '../postgresClient/pgClient';
-import fs from 'fs/promises';
-import { createReadStream } from 'fs';
 import { parse } from 'csv-parse';
+import { Response } from 'express';
+import { createReadStream } from 'fs';
+import fs from 'fs/promises';
+import { CustomRequest } from '../__generated__/customRequest';
+import pgPool from '../postgresClient/pgClient';
 import { addTestDataQuery } from '../sqlQueries/reusedSQLQueries';
 
 type CSVRowStructure = {
@@ -19,12 +20,11 @@ type CSVRowStructure = {
   paper_category: string;
   academy_name: string;
 };
-export async function csvUploadController(req: Request, res: Response) {
+export async function csvUploadController(req: CustomRequest, res: Response) {
   try {
     const file = req.file as Express.Multer.File;
-    if (!file) throw new Error();
+    if (!file || !req.user) throw new Error;
     const readStream = createReadStream(file.path);
-
     const records: CSVRowStructure[] = [];
     readStream
       .pipe(parse({ delimiter: ',', trim: true, columns: true }))

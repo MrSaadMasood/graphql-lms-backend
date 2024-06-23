@@ -51,3 +51,23 @@ describe('should test the refresh accesstoken functinality', () => {
     });
   });
 });
+
+describe('should update the role from "user" to "admin"', () => {
+  const updateUserStatusQuery = {
+    query: `mutation($email: NonEmptyString!) { 
+      UpgradeToAdmin(email: $email) {
+        isMadeAdmin
+      }
+    }`,
+    variables: {
+      email: "saad@gmail.com"
+    }
+  }
+
+  it("should upgrade the role 'user' to 'admin'", async () => {
+    const response = await apiPost(updateUserStatusQuery)
+    expect(response.body.data.UpgradeToAdmin).toEqual({
+      isMadeAdmin: true
+    })
+  })
+})
