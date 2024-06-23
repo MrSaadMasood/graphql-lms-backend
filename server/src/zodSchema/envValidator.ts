@@ -16,6 +16,7 @@ const envSchema = z.object({
   POSTGRES_PASSWORD: zodString.optional(),
   POSTGRES_DATABASE: zodString.optional(),
   POSTGRES_PORT: z.coerce.number().optional(),
+  POSTGRES_HOST: zodString.optional(),
   PORT: z.coerce.number()
 });
 
