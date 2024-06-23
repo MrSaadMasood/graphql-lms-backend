@@ -11,7 +11,7 @@ import authModule from './query/auth/auth.module';
 import tokensModule from './query/tokenManager/tokenManager.module';
 import userModule from './query/user/user.module';
 import uploadCSVRouter from './routes/uploadCSVRouter';
-import { context } from './utils/helperFunctions';
+import { authenticateAdmin, context } from './utils/helperFunctions';
 import env from "./zodSchema/envValidator"
 import compression from 'compression'
 import helmet from "helmet"
@@ -60,6 +60,7 @@ async function server() {
     app.use(
       '/upload',
       express.urlencoded({ extended: false }),
+      authenticateAdmin,
       uploadCSVRouter,
     );
     app.use('/', expressMiddleware(apolloServer, {
