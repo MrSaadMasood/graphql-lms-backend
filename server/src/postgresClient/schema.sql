@@ -46,6 +46,10 @@ INSERT INTO users (id, first_name, last_name, email, password, role, subscriptio
 VALUES ( 'f415284b-87b4-4206-a79f-5bd61b00de97', 'hamza', 'saleem', 'hamza@gmail.com', 
 '$2a$10$Aqb2UA6V6n/p6tJZPUWvre3HnSef3WX/v822L7x9RxHT0mJXkx9w6', 'user', 'none', 300, 'normal');
 
+INSERT INTO users (id, first_name, last_name, email, password, role, subscription_type, free_tokens, login_method) 
+VALUES ( '0b33ebed-9a89-4e15-b920-88082b06f6ef', 'saad', 'masood', 'saad@gmail.com', 
+'$2a$10$43QZZ3oxQKs0Am97EwbDF.PWgLxrRgSxMP/yjbDXj4PNF4/58QlFW', 'admin', 'none', 300, 'normal');
+
 
 INSERT INTO test_data (
     subject, 

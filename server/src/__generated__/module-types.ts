@@ -6,7 +6,7 @@ export namespace QueryModule {
     UpdateMCQOutput: 'id' | 'statement' | 'option_a' | 'option_b' | 'option_c' | 'correct' | 'explanation' | 'subject' | 'paper_year' | 'paper_category' | 'difficulty';
     MCQSearchResult: 'id' | 'statement';
     Query: 'SearchMCQBasedOnFilters' | 'GetSpecificMCQ' | 'GetAllMCQBasedOnAcademy' | 'dummy' | 'GetUserData' | 'GetTestBasedOnOptions' | 'GetUserPersonalTestData';
-    Mutation: 'UpdateTestMCQ' | 'DeleteTestMCQ' | 'SignUpUser' | 'LoginUser' | 'RefreshUser' | 'GoogleLogin' | 'ConsumeToken' | 'BuyMoreTokens' | 'SaveUserTestData';
+    Mutation: 'UpdateTestMCQ' | 'DeleteTestMCQ' | 'SignUpUser' | 'LoginUser' | 'RefreshUser' | 'GoogleLogin' | 'ConsumeToken' | 'BuyMoreTokens' | 'SaveUserTestData' | 'PurchaseOneTimeSubscription';
     Success: 'isSuccess';
     AccessToken: 'accessToken';
     Tokens: 'accessToken' | 'refreshToken' | 'login_method' | 'role';
@@ -131,6 +131,7 @@ export namespace QueryModule {
       ConsumeToken?: gm.Middleware[];
       BuyMoreTokens?: gm.Middleware[];
       SaveUserTestData?: gm.Middleware[];
+      PurchaseOneTimeSubscription?: gm.Middleware[];
     };
     Success?: {
       '*'?: gm.Middleware[];

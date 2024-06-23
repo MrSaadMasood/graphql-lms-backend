@@ -1,10 +1,10 @@
-import { BuyMoreTokens, ConsumeToken } from "./resolverHelpers";
+import { BuyMoreTokens, ConsumeToken } from './resolverHelpers';
 
 const resolvers = {
   Mutation: {
     ConsumeToken,
-    BuyMoreTokens
-  }
-}
+    BuyMoreTokens,
+  },
+};
 
-export default resolvers
+export default resolvers;

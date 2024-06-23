@@ -1,4 +1,4 @@
-import { generateAccessRefreshToken } from './authUtils';
+import { generateAccessRefreshToken } from '../../utils/authUtils';
 import jwt from 'jsonwebtoken';
 import { v4 as uuid } from 'uuid';
 import {
@@ -23,13 +23,8 @@ import { createGoogleUserTransaction } from '../../sqlQueries/transactions';
 import { GraphQLError } from 'graphql';
 import { refreshGoogleAccessToken } from '../../utils/refreshGoogleAccessToken';
 import dotenv from 'dotenv';
+import type { UserRole, UserInfoToCreateToken } from "../../__generated__/types.d.ts"
 dotenv.config();
-type UserInfoToCreateToken = {
-  password: string;
-  id: string;
-  role: UserRole;
-  login_method: UserLoginMethod;
-};
 
 const { GOOGLE_CLIENT_ID, REFRESH_SECRET_USER, REFRESH_SECRET_ADMIN } = env;
 
@@ -42,22 +37,22 @@ export async function LoginUser(
     [email],
   );
   const { password: hashedPassword, role, id, login_method } = user.rows[0];
-   
+
   if (login_method !== 'normal') throw new AuthorizationError();
   const passwordMatch = await bcrypt.compare(password, hashedPassword);
   if (!passwordMatch) throw new InputValidationError();
-   
+
   const { accessToken, refreshToken } = generateAccessRefreshToken({
     id,
     role,
   });
-   
+
   const storeRefreshToken = await pg.query(storeRefreshTokenQuery, [
     id,
     refreshToken,
   ]);
   if (!storeRefreshToken.rowCount) throw new DbError();
-   
+
   return {
     accessToken,
     login_method,
@@ -73,14 +68,15 @@ export async function SignUpUser(
   }: { input: CreateUserInput },
 ) {
   const hashedPassword = await bcrypt.hash(password, 10);
+  const id = uuid()
   const signuUpUser = await pg.query(signUpUserQuery, [
-    uuid(),
+    id,
     first_name,
     last_name,
     email,
     hashedPassword,
     'user',
-    "none",
+    'none',
     300,
     login_method,
   ]);

@@ -1,8 +1,16 @@
-FROM postgres:16-alpine3.19
+FROM node:20-alpine AS builder
 
-WORKDIR /
+WORKDIR /app
 
-COPY ./src/postgresClient/schema.sql ./docker-entrypoint-initdb.d/
+COPY . .
+
+RUN npm ci
 
 
-ENV POSTGRES_PASSWORD='postgres'
+CMD [ "npm", "run", "prod" ]
+
+
+
+
+
+

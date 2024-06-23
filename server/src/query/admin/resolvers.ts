@@ -1,5 +1,11 @@
-import { NonEmptyString } from "../../customScalars/nonEmptyString"
-import { DeleteTestMCQ, GetAllMCQBasedOnAcademy, GetSpecificMCQ, SearchMCQBasedOnFilters, UpdateTestMCQ } from "./resolverHelpers"
+import { NonEmptyString } from '../../customScalars/nonEmptyString';
+import {
+  DeleteTestMCQ,
+  GetAllMCQBasedOnAcademy,
+  GetSpecificMCQ,
+  SearchMCQBasedOnFilters,
+  UpdateTestMCQ,
+} from './resolverHelpers';
 
 const resolvers = {
   NonEmptyString,
@@ -10,8 +16,8 @@ const resolvers = {
   },
   Mutation: {
     UpdateTestMCQ,
-    DeleteTestMCQ
-  }
-}
+    DeleteTestMCQ,
+  },
+};
 
-export default resolvers
+export default resolvers;
