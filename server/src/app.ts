@@ -20,7 +20,7 @@ const { PORT } = env
 
 const app = express();
 app.use(compression())
-// app.use(helmet())
+app.use(helmet())
 app.use(cors())
 app.use(express.json());
 
