@@ -175,3 +175,7 @@ npm run generate
 ```
 
 to generate the schema from the .graphql files using GraphQL codegen you must go to the **src/**generated**/module-types.ts** file and change the path of first line to **./graphql**. This is necessary for the correct types to be accessible during the development.
+
+### Report
+
+You can report any issues here
