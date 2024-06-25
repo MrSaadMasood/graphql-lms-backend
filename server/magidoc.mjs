@@ -36,7 +36,7 @@ export default {
   },
   website: {
     template: 'carbon-multi-page',
-    output: relativePath(`./website${currentConfig.siteRoot}`),
+    output: relativePath(`../docs${currentConfig.siteRoot}`),
     siteMeta: {
       description: `Graphql LMS API documentation for the ${currentConfig.appTitle} route`
     },

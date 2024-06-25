@@ -42,6 +42,14 @@ type SubjectWiseUserData {
   total_incorrect: Int!
   date: Date!
 }
+type Stats {
+    totalBank : Int!
+    totalUsers : Int!
+    totalAttempted : Int!
+  }
+type Subscription {
+  generalStats : Stats
+  }
 type UserPersonalTestData {
   general: [OverAllUserData!]!
   subjectWise: [SubjectWiseUserData!]!

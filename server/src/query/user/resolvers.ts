@@ -1,5 +1,6 @@
 import { Date } from '../../customScalars/DateScalar';
 import { NonEmptyString } from '../../customScalars/nonEmptyString';
+import { GENERAL_STATS, pubsub } from '../../pubSub/pubSub';
 import {
   GetTestBasedOnOptions,
   GetUserData,
@@ -11,6 +12,11 @@ import {
 const resolvers = {
   NonEmptyString,
   Date,
+  Subscription: {
+    generalStats: {
+      subscribe: () => pubsub.asyncIterator(GENERAL_STATS)
+    }
+  },
   Query: {
     GetUserData,
     GetTestBasedOnOptions,

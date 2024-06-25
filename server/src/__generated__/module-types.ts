@@ -16,6 +16,8 @@ export namespace QueryModule {
     TestDataSent: 'id' | 'statement' | 'option_a' | 'option_b' | 'option_c' | 'correct' | 'explanation' | 'difficulty' | 'paper_year' | 'subject';
     OverAllUserData: 'total_solved' | 'total_correct' | 'total_incorrect' | 'date';
     SubjectWiseUserData: 'subject' | 'total_solved' | 'total_correct' | 'total_incorrect' | 'date';
+    Stats: 'totalBank' | 'totalUsers' | 'totalAttempted';
+    Subscription: 'generalStats';
     UserPersonalTestData: 'general' | 'subjectWise';
   };
 
@@ -48,6 +50,8 @@ export namespace QueryModule {
   export type TestDataSent = Pick<Types.TestDataSent, DefinedFields['TestDataSent']>;
   export type OverAllUserData = Pick<Types.OverAllUserData, DefinedFields['OverAllUserData']>;
   export type SubjectWiseUserData = Pick<Types.SubjectWiseUserData, DefinedFields['SubjectWiseUserData']>;
+  export type Stats = Pick<Types.Stats, DefinedFields['Stats']>;
+  export type Subscription = Pick<Types.Subscription, DefinedFields['Subscription']>;
   export type UserPersonalTestData = Pick<Types.UserPersonalTestData, DefinedFields['UserPersonalTestData']>;
   export type UserTestDataInput = Pick<Types.UserTestDataInput, DefinedInputFields['UserTestDataInput']>;
 
@@ -69,6 +73,8 @@ export namespace QueryModule {
   export type TestDataSentResolvers = Pick<Types.TestDataSentResolvers, DefinedFields['TestDataSent'] | '__isTypeOf'>;
   export type OverAllUserDataResolvers = Pick<Types.OverAllUserDataResolvers, DefinedFields['OverAllUserData'] | '__isTypeOf'>;
   export type SubjectWiseUserDataResolvers = Pick<Types.SubjectWiseUserDataResolvers, DefinedFields['SubjectWiseUserData'] | '__isTypeOf'>;
+  export type StatsResolvers = Pick<Types.StatsResolvers, DefinedFields['Stats'] | '__isTypeOf'>;
+  export type SubscriptionResolvers = Pick<Types.SubscriptionResolvers, DefinedFields['Subscription']>;
   export type UserPersonalTestDataResolvers = Pick<Types.UserPersonalTestDataResolvers, DefinedFields['UserPersonalTestData'] | '__isTypeOf'>;
 
   export interface Resolvers {
@@ -85,6 +91,8 @@ export namespace QueryModule {
     TestDataSent?: TestDataSentResolvers;
     OverAllUserData?: OverAllUserDataResolvers;
     SubjectWiseUserData?: SubjectWiseUserDataResolvers;
+    Stats?: StatsResolvers;
+    Subscription?: SubscriptionResolvers;
     UserPersonalTestData?: UserPersonalTestDataResolvers;
     NonEmptyString?: Types.Resolvers['NonEmptyString'];
     Email?: Types.Resolvers['Email'];
@@ -196,6 +204,16 @@ export namespace QueryModule {
       total_correct?: gm.Middleware[];
       total_incorrect?: gm.Middleware[];
       date?: gm.Middleware[];
+    };
+    Stats?: {
+      '*'?: gm.Middleware[];
+      totalBank?: gm.Middleware[];
+      totalUsers?: gm.Middleware[];
+      totalAttempted?: gm.Middleware[];
+    };
+    Subscription?: {
+      '*'?: gm.Middleware[];
+      generalStats?: gm.Middleware[];
     };
     UserPersonalTestData?: {
       '*'?: gm.Middleware[];

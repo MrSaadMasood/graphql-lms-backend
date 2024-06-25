@@ -173,6 +173,13 @@ export type SelectedUserData = {
   subscription_type: Scalars['String']['output'];
 };
 
+export type Stats = {
+  __typename?: 'Stats';
+  totalAttempted: Scalars['Int']['output'];
+  totalBank: Scalars['Int']['output'];
+  totalUsers: Scalars['Int']['output'];
+};
+
 export type SubjectWiseUserData = {
   __typename?: 'SubjectWiseUserData';
   date: Scalars['Date']['output'];
@@ -180,6 +187,11 @@ export type SubjectWiseUserData = {
   total_correct: Scalars['Int']['output'];
   total_incorrect: Scalars['Int']['output'];
   total_solved: Scalars['Int']['output'];
+};
+
+export type Subscription = {
+  __typename?: 'Subscription';
+  generalStats?: Maybe<Scalars['String']['output']>;
 };
 
 export type Success = {
@@ -350,8 +362,10 @@ export type ResolversTypes = {
   RefreshUserInput: RefreshUserInput;
   RemainingTokens: ResolverTypeWrapper<RemainingTokens>;
   SelectedUserData: ResolverTypeWrapper<SelectedUserData>;
+  Stats: ResolverTypeWrapper<Stats>;
   String: ResolverTypeWrapper<Scalars['String']['output']>;
   SubjectWiseUserData: ResolverTypeWrapper<SubjectWiseUserData>;
+  Subscription: ResolverTypeWrapper<{}>;
   Success: ResolverTypeWrapper<Success>;
   TestDataSent: ResolverTypeWrapper<TestDataSent>;
   TestSearchFilters: TestSearchFilters;
@@ -381,8 +395,10 @@ export type ResolversParentTypes = {
   RefreshUserInput: RefreshUserInput;
   RemainingTokens: RemainingTokens;
   SelectedUserData: SelectedUserData;
+  Stats: Stats;
   String: Scalars['String']['output'];
   SubjectWiseUserData: SubjectWiseUserData;
+  Subscription: {};
   Success: Success;
   TestDataSent: TestDataSent;
   TestSearchFilters: TestSearchFilters;
@@ -463,6 +479,13 @@ export type SelectedUserDataResolvers<ContextType = any, ParentType extends Reso
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type StatsResolvers<ContextType = any, ParentType extends ResolversParentTypes['Stats'] = ResolversParentTypes['Stats']> = {
+  totalAttempted?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  totalBank?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  totalUsers?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type SubjectWiseUserDataResolvers<ContextType = any, ParentType extends ResolversParentTypes['SubjectWiseUserData'] = ResolversParentTypes['SubjectWiseUserData']> = {
   date?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   subject?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -470,6 +493,10 @@ export type SubjectWiseUserDataResolvers<ContextType = any, ParentType extends R
   total_incorrect?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   total_solved?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type SubscriptionResolvers<ContextType = any, ParentType extends ResolversParentTypes['Subscription'] = ResolversParentTypes['Subscription']> = {
+  generalStats?: SubscriptionResolver<Maybe<ResolversTypes['String']>, "generalStats", ParentType, ContextType>;
 };
 
 export type SuccessResolvers<ContextType = any, ParentType extends ResolversParentTypes['Success'] = ResolversParentTypes['Success']> = {
@@ -536,7 +563,9 @@ export type Resolvers<ContextType = any> = {
   Query?: QueryResolvers<ContextType>;
   RemainingTokens?: RemainingTokensResolvers<ContextType>;
   SelectedUserData?: SelectedUserDataResolvers<ContextType>;
+  Stats?: StatsResolvers<ContextType>;
   SubjectWiseUserData?: SubjectWiseUserDataResolvers<ContextType>;
+  Subscription?: SubscriptionResolvers<ContextType>;
   Success?: SuccessResolvers<ContextType>;
   TestDataSent?: TestDataSentResolvers<ContextType>;
   Tokens?: TokensResolvers<ContextType>;

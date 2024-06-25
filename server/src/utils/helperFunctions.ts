@@ -85,3 +85,8 @@ export function requestUserExistenceVerifier(user: UserContext, checkAdmin?: boo
   if (checkAdmin && user.role !== "admin") throw new AuthorizationError("only admins can access this endpoint")
   return user
 }
+
+export function intParser(value: string) {
+  if (!value) return 0
+  return parseInt(value)
+}

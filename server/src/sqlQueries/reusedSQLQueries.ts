@@ -227,3 +227,10 @@ export const updateUserStatusToAdminQuery = `
     role = 'admin'
   WHERE email = $1
 ;`
+
+export const generalStatsQuery = `
+  SELECT 
+    (SELECT COUNT(id) FROM test_data) AS totalBank,
+    (SELECT COUNT(id) FROM users) AS totalUsers,
+    (SELECT SUM(total_solved) FROM user_overall_data) AS totalAttempted;
+;`
