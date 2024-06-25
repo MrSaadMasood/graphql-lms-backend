@@ -14,3 +14,6 @@ export type UserInfoToCreateToken = {
 };
 
 export type UserContext = UserInfoToCreateToken | null
+export interface GeneralStats {
+  [key: string]: string
+}

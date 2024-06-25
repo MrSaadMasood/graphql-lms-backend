@@ -1,7 +1,7 @@
 import { ApolloServer } from '@apollo/server';
 import { WebSocketServer } from 'ws';
 import { useServer } from "graphql-ws/lib/use/ws"
-import { createServer } from 'https'
+import http from 'http'
 import { expressMiddleware } from '@apollo/server/express4';
 import express from 'express';
 import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHttpServer"
@@ -16,27 +16,35 @@ import env from "./zodSchema/envValidator"
 import compression from 'compression'
 import helmet from "helmet"
 import cors from "cors"
+import { PubSub } from "graphql-subscriptions"
 const { PORT } = env
 
 const app = express();
 app.use(compression())
-app.use(helmet())
+// app.use(helmet())
 app.use(cors())
 app.use(express.json());
-
-const httpServer = createServer(app)
+const httpServer = http.createServer(app)
 const wsServer = new WebSocketServer({
   server: httpServer,
   path: "/"
 })
+
 const application = createApplication({
   modules: [authModule, tokensModule, userModule, adminModule],
+  providers: [
+    {
+      provide: PubSub,
+      useValue: new PubSub()
+    }
+  ]
 });
 
 const executor = application.createApolloExecutor();
+const subscribe = application.createSubscription()
 const schema = application.schema;
 
-const serverCleanup = useServer({ schema }, wsServer)
+const serverCleanup = useServer({ schema, subscribe }, wsServer)
 const apolloServer = new ApolloServer({
   gateway: {
     async load() {
@@ -49,8 +57,17 @@ const apolloServer = new ApolloServer({
     async stop() { },
   },
   plugins: [
-    ApolloServerPluginDrainHttpServer({ httpServer })
-  ]
+    ApolloServerPluginDrainHttpServer({ httpServer }),
+    {
+      async serverWillStart() {
+        return {
+          async drainServer() {
+            await serverCleanup.dispose()
+          }
+        }
+      }
+    }
+  ],
 });
 
 async function server() {
@@ -66,7 +83,7 @@ async function server() {
     app.use('/', expressMiddleware(apolloServer, {
       context: context
     }));
-    app.listen(PORT, () => console.log(`the serve is now running`));
+    httpServer.listen(PORT, () => console.log(`the serve is now running`, PORT));
   } catch (error) {
     console.log('some error occured while running the apollo server', error);
     await apolloServer.stop();

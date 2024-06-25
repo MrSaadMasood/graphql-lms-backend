@@ -3,10 +3,12 @@ import {
   TestDataSent,
   UserTestDataInput,
 } from '../../__generated__/graphql';
-import { UserContext } from '../../__generated__/types';
+import { GeneralStats, UserContext } from '../../__generated__/types';
 import { DbError, InputValidationError } from '../../customErrors/errors';
 import pgPool from '../../postgresClient/pgClient';
+import { GENERAL_STATS, pubsub } from '../../pubSub/pubSub';
 import {
+  generalStatsQuery,
   getUserDataQuery,
   getUserGeneralTestDataQuery,
   getUserSubjectWiseTestDataQuery,
@@ -16,7 +18,7 @@ import {
   testBasedOnSubjectQuery,
 } from '../../sqlQueries/reusedSQLQueries';
 import { stripe } from '../../stripe/stripe';
-import { requestUserExistenceVerifier } from '../../utils/helperFunctions';
+import { intParser, requestUserExistenceVerifier } from '../../utils/helperFunctions';
 
 export async function GetUserData(
   _root: unknown,
@@ -24,8 +26,19 @@ export async function GetUserData(
   context: { user: UserContext }
 ) {
   const user = requestUserExistenceVerifier(context.user)
-  const userData = await pgPool.query(getUserDataQuery, [user.email]);
-  if (!userData.rowCount) throw new DbError('failed to get the user Data');
+  const [userData, generalStats] = await Promise.all([
+    pgPool.query(getUserDataQuery, [user.email]),
+    pgPool.query<GeneralStats>(generalStatsQuery)
+  ])
+  if (!userData.rowCount || !generalStats.rowCount) throw new DbError('failed to get the user Data');
+  const stats = generalStats.rows[0]
+  pubsub.publish(GENERAL_STATS, {
+    generalStats: {
+      totalBank: intParser(stats.totalbank),
+      totalUsers: intParser(stats.totalusers),
+      totalAttempted: intParser(stats.totalattempted)
+    }
+  })
   return userData.rows[0];
 }
 
@@ -82,15 +95,25 @@ export async function SaveUserTestData(
   context: { user: UserContext }
 ) {
   const user = requestUserExistenceVerifier(context.user)
-  const savedUserTestData = await pgPool.query(saveUserTestDataQuery, [
+  const [savedUserTestData, generalStats] = await Promise.all([pgPool.query(saveUserTestDataQuery, [
     user.id,
     subject,
     totalSolved,
     totalCorrect,
     totalWrong,
-  ]);
-  if (!savedUserTestData.rowCount)
+  ]),
+  pgPool.query<GeneralStats>(generalStatsQuery)
+  ])
+  if (!savedUserTestData.rowCount || !generalStats)
     throw new DbError('failed to save the user data');
+  const stats = generalStats.rows[0]
+  pubsub.publish(GENERAL_STATS, {
+    generalStats: {
+      totalBank: intParser(stats.totalbank),
+      totalUsers: intParser(stats.totalusers),
+      totalAttempted: intParser(stats.totalattempted)
+    }
+  })
   return true;
 }
 
