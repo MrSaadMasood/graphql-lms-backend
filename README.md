@@ -2,6 +2,12 @@
 
 This the backend of a learning management system which basically focuses on Test conduction using MCQs.
 
+## Hosted Link
+
+```
+https://lms-graphql-backend.adaptable.app
+```
+
 ## Features
 
 - **OAuth Authentication with Google** and In-house JWT Authentication.
