@@ -89,6 +89,7 @@ function server() {
         return;
       yield apolloServer.start();
       app.use('/upload', express.urlencoded({ extended: false }), authenticateAdmin, uploadCSVRouter);
+      app.use("/ping", (req, res) => res.json("pong"))
       app.use('/', expressMiddleware(apolloServer, {
         context: context
       }));
