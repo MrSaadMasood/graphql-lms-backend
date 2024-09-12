@@ -1,0 +1,7 @@
+type RemainingTokens {
+  remainingTokens: Int!
+}
+type Mutation {
+  ConsumeToken(isTestCompleted: Boolean!): RemainingTokens!
+  BuyMoreTokens: RemainingTokens!
+}

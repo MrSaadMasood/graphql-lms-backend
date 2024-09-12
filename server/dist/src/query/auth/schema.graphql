@@ -1,0 +1,45 @@
+scalar NonEmptyString
+scalar Email
+
+type Success {
+  isSuccess: Boolean!
+}
+
+type AccessToken {
+  accessToken: String!
+}
+type UpgradeStatus {
+     isMadeAdmin : Boolean!
+  }
+type Tokens {
+  accessToken: String!
+  refreshToken: String!
+  login_method: String!
+  role: String!
+}
+type Query {
+  Ping: String!
+}
+input LoginUserInput {
+  email: Email!
+  password: NonEmptyString!
+}
+input CreateUserInput {
+  first_name: NonEmptyString!
+  last_name: NonEmptyString!
+  email: Email!
+  password: NonEmptyString!
+  login_method: NonEmptyString!
+}
+input RefreshUserInput {
+  refreshToken: NonEmptyString!
+  login_method: NonEmptyString!
+  role: NonEmptyString!
+}
+type Mutation {
+  SignUpUser(input: CreateUserInput!): Success!
+  LoginUser(input: LoginUserInput!): Tokens!
+  RefreshUser(input: RefreshUserInput!): AccessToken!
+  GoogleLogin(code: NonEmptyString!): Tokens!
+  UpgradeToAdmin(email : NonEmptyString!) : UpgradeStatus!
+}
