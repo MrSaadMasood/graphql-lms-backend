@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "```mermaid",
   "type": "module",
-  "main": "./api/index.ts",
+  "main": "./api/index.js",
   "scripts": {
     "pretty": "npx prettier . --write",
     "dev": "NODE_ENV=dev tsx watch ./src/app.ts",
